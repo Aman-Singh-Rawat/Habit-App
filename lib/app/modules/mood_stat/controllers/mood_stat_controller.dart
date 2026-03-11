@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:habitly/app/core/utils/toasts.dart';
 import 'package:habitly/app/modules/mood_stat/models/mood_calendar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../month_year_picker_dialog.dart';
+import '../show_mood_emoji_stat.dart';
 
 final moods = [
   MoodCalendar(emoji: '😊', label: 'Good', date: DateTime(2026, 2, 25)),
@@ -26,9 +28,10 @@ class MoodStatController extends GetxController {
   Rx<DateTime> selectedMonth = DateTime.now().obs;
   final Map<DateTime, MoodCalendar> moodMap = {};
 
-  final RxInt daysInMonth = 0.obs,
-      firstWeekday = 0.obs,
-      selectedMoodIndex = (-1).obs;
+  final RxInt daysInMonth = 0.obs;
+  final RxInt firstWeekday = 0.obs;
+  final RxInt selectedMoodIndex = (-1).obs;
+  final RxInt selectedFeelingIndex = (-1).obs;
 
   // Getx Methods
   @override
@@ -93,5 +96,12 @@ class MoodStatController extends GetxController {
       initialDate: selectedMonth.value,
       onConfirm: (date) => selectedMonth.value = date,
     );
+  }
+
+  void handleMoodSelection() {
+    if (selectedMoodIndex.value != -1) {
+      Toasts.successToast(msg: 'Yeh bro what is it');
+      showMoodFeelingStat(instance);
+    }
   }
 }

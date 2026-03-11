@@ -61,8 +61,8 @@ class MoodBottomSheetWidget extends StatelessWidget {
 
                 // soft background
                 color: isSelected
-                    ? baseColor.withOpacity(.7)
-                    : Colors.grey.withOpacity(.08),
+                    ? baseColor
+                    : AppColors.primaryLight.withOpacity(.01),
 
                 // subtle elevation
                 boxShadow: [

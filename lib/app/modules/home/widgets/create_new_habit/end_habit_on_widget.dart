@@ -157,26 +157,23 @@ void showCalendarBottomSheet({
             ),
           ),
           child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  // Drag handle
-                  Container(
-                    width: 40.w,
-                    height: 3.5.h,
-                    margin: EdgeInsets.only(bottom: AppSpacing.md),
-                    decoration: BoxDecoration(
-                      color: AppColors.darkSecondaryColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                // Drag handle
+                Container(
+                  width: 40.w,
+                  height: 3.5.h,
+                  margin: EdgeInsets.only(bottom: AppSpacing.md),
+                  decoration: BoxDecoration(
+                    color: AppColors.darkSecondaryColor,
+                    borderRadius: BorderRadius.circular(10),
                   ),
+                ),
 
-                  Expanded(child: child),
-                ],
-              ),
-            ),
+                Expanded(child: child),
+              ],
+            ).paddingSymmetric(horizontal: 16.w, vertical: 10.h),
           ),
         ),
       );

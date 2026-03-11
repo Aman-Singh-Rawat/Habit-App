@@ -10,6 +10,7 @@ import 'package:habitly/app/core/utils/helpers/helper_function.dart';
 import 'package:habitly/app/modules/home/controllers/home_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/end_habit_on_widget.dart';
 import 'package:habitly/app/modules/mood_stat/controllers/mood_stat_controller.dart';
+import 'package:habitly/app/modules/mood_stat/show_mood_emoji_stat.dart';
 import 'package:habitly/app/modules/widgets/appbar/custom_appbar.dart';
 import 'package:habitly/app/modules/widgets/container/custom_card.dart';
 import 'package:hive/hive.dart';
@@ -33,7 +34,6 @@ class MoodDayTile extends StatelessWidget {
   const MoodDayTile({super.key, this.mood, this.moodDate});
 
   /// -------- DATE HELPERS --------
-
   DateTime get _today => normalizeDate(DateTime.now());
 
   DateTime get _date => normalizeDate(mood?.date ?? moodDate!);
@@ -43,6 +43,8 @@ class MoodDayTile extends StatelessWidget {
   bool get _isPast => _date.isBefore(_today);
 
   bool get _hasMood => mood != null;
+
+  int get dayNumber => mood?.date.day ?? moodDate!.day;
 
   /// -------- UI TEXT --------
 
@@ -83,8 +85,6 @@ class MoodDayTile extends StatelessWidget {
     return AppColors.moodDarkEmptyIconColor;
   }
 
-  /// -------- ICON --------
-
   IconData get icon {
     if (_isToday || _isPast) {
       return Icons.add;
@@ -92,68 +92,13 @@ class MoodDayTile extends StatelessWidget {
     return Icons.emoji_emotions_outlined;
   }
 
-  /// -------- DAY NUMBER --------
-
-  int get dayNumber => mood?.date.day ?? moodDate!.day;
-
   /// -------- UI --------
-
   @override
   Widget build(BuildContext context) {
     final controller = MoodStatController.instance;
 
     return GestureDetector(
-      onTap: () => showCalendarBottomSheet(
-        context: context,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: AppSpacing.sm.h),
-
-            Text(
-              strHowIsYourMoodToday,
-              style: Theme.of(
-                context,
-              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
-            ),
-
-            Divider().paddingSymmetric(vertical: AppSpacing.bf.h),
-            Expanded(
-              child: Wrap(
-                spacing: 32,
-                runSpacing: 36,
-                alignment: WrapAlignment.center,
-                children: List.generate(AppLists.moodList.length, (index) {
-                  final moodItem = AppLists.moodList[index];
-
-                  return Obx(
-                    () => MoodBottomSheetWidget(
-                      emoji: moodItem.emoji,
-                      title: moodItem.title,
-                      isSelected: controller.selectedMoodIndex.value == index,
-                      onTap: () {
-                        controller.selectedMoodIndex.value = index;
-                      },
-                    ),
-                  );
-                }),
-              ),
-            ),
-
-            Divider().paddingOnly(bottom: AppSpacing.lg),
-
-            SizedBox(
-              width: double.infinity,
-              child: CustomElevatedButton(
-                buttonText: AppStrings.continueText,
-                onClick: () {},
-              ),
-            ),
-
-            SizedBox(height: 20.h),
-          ],
-        ),
-      ),
+      onTap: () => showMoodEmojiStat(controller),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,

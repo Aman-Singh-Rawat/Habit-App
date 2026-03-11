@@ -66,6 +66,7 @@ const String strInspired = 'Inspired';
 const String strProud = 'Proud';
 const String strEuphoric = 'Euphoric';
 const String strNostalgic = 'Nostalgic';
+const String strIFeel = 'I Feel';
 
 /// Month Picker
 const String strSelectMonth = 'SELECT MONTH';
