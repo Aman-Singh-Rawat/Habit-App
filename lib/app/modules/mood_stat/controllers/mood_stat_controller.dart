@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:habitly/app/modules/mood_stat/models/mood_calendar.dart';
-import 'package:month_year_picker/month_year_picker.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../month_year_picker_dialog.dart';
 
 final moods = [
   MoodCalendar(emoji: '😊', label: 'Good', date: DateTime(2026, 2, 25)),
@@ -87,58 +88,10 @@ class MoodStatController extends GetxController {
     );
   }
 
-  // show month year dialog for changing year & month 📅
-  void funShowMonthYearPicker() async {
-    final pickedDate = await showMonthYearPicker(
-      context: Get.overlayContext!,
+  void showMonthYearPicker() {
+    MonthYearPickerDialog.show(
       initialDate: selectedMonth.value,
-      firstDate: DateTime(2025),
-      lastDate: DateTime(2100),
-      builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
-        child: child!,
-      ),
-    );
-
-    if (pickedDate != null) {
-      selectedMonth.value = pickedDate;
-    }
-  }
-
-  void funShowCustomMonthYearPicker() {
-    showDialog(
-      context: Get.overlayContext!,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              titleTextStyle: TextStyle(),
-              title: Text('Choose Month & Year', textAlign: TextAlign.start),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Counter value: 0"),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Call setState to update the counter and rebuild the builder
-                      /*setState(() {
-                      counter++;
-                    });*/
-                    },
-                    child: Text("Increment"),
-                  ),
-                ],
-              ),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text("Close"),
-                ),
-              ],
-            );
-          },
-        );
-      },
+      onConfirm: (date) => selectedMonth.value = date,
     );
   }
 }

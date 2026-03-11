@@ -7,7 +7,6 @@ import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/theme/app_theme.dart';
 import 'package:habitly/app/modules/bindings/app_bindings.dart';
 import 'package:habitly/app/routes/app_pages.dart';
-import 'package:month_year_picker/month_year_picker.dart';
 
 class habitlyApp extends StatelessWidget {
   const habitlyApp({super.key});
@@ -20,17 +19,10 @@ class habitlyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            MonthYearPickerLocalizations.delegate,
-          ],
-          supportedLocales: const [Locale('en')],
           initialBinding: AppBindings(),
           title: AppStrings.habitly,
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.splash,
+          initialRoute: AppRoutes.main,
           getPages: AppPages.pages,
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,

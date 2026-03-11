@@ -1,6 +1,8 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:habitly/app/core/constants/app_lists.dart';
+import 'package:habitly/app/core/constants/app_routes.dart';
 import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/extensions/onboarding_texts.dart';
@@ -115,7 +117,10 @@ class ContractScreen extends StatelessWidget {
         appBar: appBar(),
         body: bodyWidget(context),
         bottomSheet: BottomWidget(
-          child: ExpandedButton(text: AppStrings.finish),
+          child: ExpandedButton(
+            text: AppStrings.finish,
+            onPressed: () => Get.toNamed(AppRoutes.main),
+          ),
         ),
       ),
     );
