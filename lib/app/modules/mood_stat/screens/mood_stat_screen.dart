@@ -16,6 +16,7 @@ import 'package:hive/hive.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../core/constants/app_lists.dart';
+import '../../../core/constants/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/calendar_table_style.dart';
@@ -82,9 +83,15 @@ class MoodStatScreen extends GetView<MoodStatController> {
       appBar: AppBar(
         leadingWidth: 48,
         centerTitle: true,
+
         leading: LeadingAppBarImageWidget(),
         title: Text(AppStrings.moodStat),
-        actions: const [Icon(Icons.history)],
+        actions: [
+          GestureDetector(
+            onTap: () => Get.toNamed(AppRoutes.moodStatHistory),
+            child: const Icon(Icons.history_rounded),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: CustomCard(
@@ -147,5 +154,3 @@ class MoodStatScreen extends GetView<MoodStatController> {
     );
   }
 }
-
-

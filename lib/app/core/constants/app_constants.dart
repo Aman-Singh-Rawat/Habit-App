@@ -68,6 +68,10 @@ const String strEuphoric = 'Euphoric';
 const String strNostalgic = 'Nostalgic';
 const String strIFeel = 'I Feel';
 
+
+/// Mood Stat History
+const String strMoodStatHistory = 'Mood Stat History';
+
 /// Month Picker
 const String strSelectMonth = 'SELECT MONTH';
 

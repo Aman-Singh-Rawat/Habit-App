@@ -12,6 +12,8 @@ import 'package:habitly/app/modules/bottom_nav/bindings/main_binding.dart';
 import 'package:habitly/app/modules/bottom_nav/views/main_screen.dart';
 import 'package:habitly/app/modules/home/bindings/create_new_habit_binding.dart';
 import 'package:habitly/app/modules/home/screens/create_new_habit_screen.dart';
+import 'package:habitly/app/modules/mood_stat/bindings/mood_stat_history_binding.dart';
+import 'package:habitly/app/modules/mood_stat/screens/mood_stat_history_screen.dart';
 import 'package:habitly/app/modules/onboarding/bindings/onboarding_binding.dart';
 import 'package:habitly/app/modules/onboarding/views/screens/onboarding_screen.dart';
 import 'package:habitly/app/modules/splash/bindings/splash_bindings.dart';
@@ -117,6 +119,12 @@ class AppPages {
       name: AppRoutes.createNewHabit,
       page: () => CreateNewHabitScreen(),
       binding: CreateNewHabitBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.moodStatHistory,
+      page: () => MoodStatHistoryScreen(),
+      binding: MoodStatHistoryBinding(),
     ),
   ];
 }
