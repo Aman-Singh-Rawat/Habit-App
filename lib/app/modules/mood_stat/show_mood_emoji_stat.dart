@@ -6,6 +6,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_utils/src/extensions/widget_extensions.dart';
 import 'package:habitly/app/modules/mood_stat/controllers/mood_stat_controller.dart';
+import 'package:habitly/app/modules/mood_stat/models/mood.dart';
 import 'package:habitly/app/modules/mood_stat/widgets/mood_bottom_sheet_widget.dart';
 
 import '../../core/constants/app_constants.dart';
@@ -15,6 +16,7 @@ import '../../core/constants/app_strings.dart';
 import '../../core/theme/app_colors.dart';
 import '../home/widgets/create_new_habit/end_habit_on_widget.dart';
 import '../widgets/buttons/custom_elevated_button.dart';
+import 'models/mood_feeling_model.dart';
 
 void moodBottomSheet({
   required String headline,
@@ -30,7 +32,7 @@ void moodBottomSheet({
 
         Text(
           headline,
-          textAlign: .center,
+          textAlign: TextAlign.center,
 
           style: Theme.of(
             Get.overlayContext!,
@@ -52,31 +54,39 @@ void moodBottomSheet({
   );
 }
 
-void showMoodEmojiStat(MoodStatController controller) {
-  /*showMoodFeelingStat(controller);
-  return;*/
+void showMoodEmojiStat(MoodStatController controller, MoodFeelingModel? mood,
+    DateTime selectedDate,) {
+  // reset selection
+  controller.selectedMoodIndex.value = mood != null
+      ? AppLists.moodList.indexWhere((e) => e.title == mood.title)
+      : -1;
+
   moodBottomSheet(
     headline: strHowIsYourMoodToday,
     listWidget: Expanded(
-      child: Wrap(
-        spacing: 32,
-        runSpacing: 36,
-        alignment: WrapAlignment.center,
-        children: List.generate(AppLists.moodList.length, (index) {
-          final moodItem = AppLists.moodList[index];
+      child: Obx(() {
+        return Wrap(
+          spacing: 32,
+          runSpacing: 36,
+          alignment: WrapAlignment.center,
+          children: List.generate(AppLists.moodList.length, (index) {
+            final moodItem = AppLists.moodList[index];
 
-          return Obx(
-            () => MoodBottomSheetWidget(
+            final isSelected = controller.selectedMoodIndex.value == -1
+                ? (mood != null && mood.title == moodItem.title)
+                : controller.selectedMoodIndex.value == index;
+
+            return MoodBottomSheetWidget(
               emoji: moodItem.emoji,
               title: moodItem.title,
-              isSelected: controller.selectedMoodIndex.value == index,
+              isSelected: isSelected,
               onTap: () {
                 controller.selectedMoodIndex.value = index;
               },
-            ),
-          );
-        }),
-      ),
+            );
+          }),
+        );
+      }),
     ),
     buttonWidget: Obx(() {
       final index = controller.selectedMoodIndex.value;
@@ -87,25 +97,39 @@ void showMoodEmojiStat(MoodStatController controller) {
 
       return CustomElevatedButton(
         buttonText: btnText,
-        onClick: controller.handleMoodSelection,
+        onClick: () =>  controller.handleMoodSelection(mood, selectedDate),
       );
     }),
   );
 }
 
-void showMoodFeelingStat(MoodStatController controller) {
+void showMoodFeelingStat(
+    MoodStatController controller,
+    MoodFeelingModel? moodModel,
+    DateTime selectedDate, // ✅ add this
+    ) {
+  controller.selectedFeelingIndex.value =
+  moodModel != null && moodModel.feeling != null
+      ? AppLists.feelingsList.indexWhere(
+        (feeling) => feeling == moodModel.feeling,
+  )
+      : -1;
+
   moodBottomSheet(
     headline: strDescribeYourFeeling,
     listWidget: Expanded(
       child: SingleChildScrollView(
         child: Obx(
-          () => Wrap(
+              () => Wrap(
             spacing: 18,
             runSpacing: 18,
             alignment: WrapAlignment.center,
             children: List.generate(AppLists.feelingsList.length, (index) {
               final feeling = AppLists.feelingsList[index];
-              final isSelected = controller.selectedFeelingIndex.value == index;
+
+              final isSelected = controller.selectedFeelingIndex.value == -1
+                  ? (moodModel != null && moodModel.feeling == feeling)
+                  : controller.selectedFeelingIndex.value == index;
 
               return GestureDetector(
                 onTap: () {
@@ -125,9 +149,10 @@ void showMoodFeelingStat(MoodStatController controller) {
                   ),
                   child: Text(
                     feeling,
-                    style: Theme.of(
-                      Get.context!,
-                    ).textTheme.bodyMedium!.copyWith(fontWeight: .w600),
+                    style: Theme.of(Get.context!)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
               );
@@ -145,7 +170,7 @@ void showMoodFeelingStat(MoodStatController controller) {
 
       return CustomElevatedButton(
         buttonText: btnText,
-        onClick: controller.handleMoodSelection,
+        onClick: () => controller.handleFeelingSelection(selectedDate),
       );
     }),
   );

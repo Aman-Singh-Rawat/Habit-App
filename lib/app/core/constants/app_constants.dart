@@ -1,5 +1,9 @@
+/// Databases
 const String strRegularHabits = 'regularHabits';
 const String strOneTimeTasks = 'oneTimeTasks';
+const String strMoodFeeling = 'moodFeeling';
+
+/// others
 const String strPleaseSelectReminderTime = 'Please Select Reminder Time';
 const String strPleaseSelectADate = 'Please Select a Date';
 const String strSelectAnEndDate = 'Select an end date';
@@ -67,7 +71,6 @@ const String strProud = 'Proud';
 const String strEuphoric = 'Euphoric';
 const String strNostalgic = 'Nostalgic';
 const String strIFeel = 'I Feel';
-
 
 /// Mood Stat History
 const String strMoodStatHistory = 'Mood Stat History';

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/modules/home/models/one_time_task.dart';
 import 'package:habitly/app/modules/home/models/regular_habit.dart';
+import 'package:habitly/app/modules/mood_stat/models/mood_feeling_model.dart';
 import 'package:habitly/habitly_app.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:toastification/toastification.dart';
@@ -35,12 +36,13 @@ Future<void> initMain() async {
 
   await Hive.initFlutter();
 
-
-  //await Hive.deleteFromDisk();
+  await Hive.deleteFromDisk();
 
   Hive.registerAdapter(RegularHabitAdapter());
   Hive.registerAdapter(OneTimeTaskAdapter());
+  Hive.registerAdapter(MoodFeelingModelAdapter());
 
   await Hive.openBox<RegularHabit>(strRegularHabits);
   await Hive.openBox<OneTimeTask>(strOneTimeTasks);
+  await Hive.openBox<MoodFeelingModel>(strMoodFeeling);
 }

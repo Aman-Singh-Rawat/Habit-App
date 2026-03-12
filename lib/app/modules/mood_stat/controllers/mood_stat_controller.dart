@@ -1,24 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:habitly/app/core/utils/toasts.dart';
+import 'package:habitly/app/data/local/mood_storage.dart';
+import 'package:habitly/app/modules/mood_stat/models/mood.dart';
 import 'package:habitly/app/modules/mood_stat/models/mood_calendar.dart';
+import 'package:habitly/app/modules/mood_stat/models/mood_feeling_model.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../core/constants/app_lists.dart';
 import '../month_year_picker_dialog.dart';
 import '../show_mood_emoji_stat.dart';
-
-final moods = [
-  MoodCalendar(emoji: '😊', label: 'Good', date: DateTime(2026, 2, 25)),
-  MoodCalendar(emoji: '😎', label: 'Great', date: DateTime(2026, 2, 26)),
-  MoodCalendar(emoji: '😐', label: 'Okay', date: DateTime(2026, 2, 27)),
-  MoodCalendar(emoji: '😡', label: 'Bad', date: DateTime(2026, 2, 28)),
-  MoodCalendar(emoji: '😎', label: 'Great', date: DateTime(2026, 3, 1)),
-  MoodCalendar(emoji: '😊', label: 'Good', date: DateTime(2026, 3, 2)),
-
-  // skipped 3 March
-  MoodCalendar(emoji: '😢', label: 'Low', date: DateTime(2026, 3, 4)),
-];
 
 class MoodStatController extends GetxController {
   // Class Instance
@@ -26,12 +20,20 @@ class MoodStatController extends GetxController {
 
   // Global Variables
   Rx<DateTime> selectedMonth = DateTime.now().obs;
-  final Map<DateTime, MoodCalendar> moodMap = {};
+  final RxMap<DateTime, MoodFeelingModel> moodMap =
+      <DateTime, MoodFeelingModel>{}.obs;
 
+  /// containing the list of moods which user added
+  final RxList<MoodFeelingModel> moods = <MoodFeelingModel>[].obs;
+
+  /// others
   final RxInt daysInMonth = 0.obs;
   final RxInt firstWeekday = 0.obs;
   final RxInt selectedMoodIndex = (-1).obs;
   final RxInt selectedFeelingIndex = (-1).obs;
+
+  // Database instance
+  final MoodStorage storage = MoodStorage.instance;
 
   // Getx Methods
   @override
@@ -45,18 +47,23 @@ class MoodStatController extends GetxController {
     /// listening the changes because whenever the selected date changes we needed last date & number of months
     ever(selectedMonth, (_) => calculateMonthData());
 
-    /// buildMoodMap is for stored date in which date user added their mood
-    /// the purpose of buildMoodMap is to binding mood with date key
+    loadMoods();
+  }
+
+  void loadMoods() {
+    final list = storage.getAllMoodFeeling();
+    print('MoodList;; =>> ${list.map((item) => item.toString())}');
+    moods.assignAll(List.from(list)); // force new reference
+    print("called mood_stat_controller");
     buildMoodMap();
   }
 
-  // User Methods
   void buildMoodMap() {
     moodMap.clear();
-
-    for (final mood in moods) {
-      moodMap[normalizeDate(mood.date)] = mood;
-    }
+    moodMap.addAll({
+      for (final mood in moods)
+        normalizeDate(mood.date): mood
+    });
   }
 
   void calculateMonthData() {
@@ -98,10 +105,60 @@ class MoodStatController extends GetxController {
     );
   }
 
-  void handleMoodSelection() {
+  void handleMoodSelection(MoodFeelingModel? moodFeelingModel, DateTime selectedDate,) async {
     if (selectedMoodIndex.value != -1) {
-      Toasts.successToast(msg: 'Yeh bro what is it');
-      showMoodFeelingStat(instance);
+      String id =
+          '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(999)}';
+
+      print("debugs list==>:: ${AppLists.moodList[selectedMoodIndex.value]}");
+      final mood = AppLists.moodList[selectedMoodIndex.value];
+      if (moodFeelingModel != null) {
+        moodFeelingModel.title = mood.title;
+        moodFeelingModel.emoji = mood.emoji;
+
+        moodFeelingModel.save();
+      } else {
+        await storage.addMoodFeeling(
+          MoodFeelingModel(
+            id: id,
+            title: mood.title,
+            emoji: mood.emoji,
+            date: normalizeDate(selectedDate),
+          ),
+        );
+      }
+
+      print("debugs ====>:: ${storage.getAllMoodFeeling()}");
+      loadMoods();
+      selectedMoodIndex.value = -1;
+      Get.back();
+
+      final updatedMood = moodMap[normalizeDate(selectedDate)];
+      showMoodFeelingStat(instance, updatedMood, selectedDate);
+    }
+  }
+
+  void handleFeelingSelection(DateTime selectedDate) async {
+    if (selectedFeelingIndex.value != -1) {
+      final feeling = AppLists.feelingsList[selectedFeelingIndex.value];
+
+      final allMoods = storage.getAllMoodFeeling();
+
+      final todayMood = allMoods.firstWhere(
+        // ✅ use selectedDate instead of DateTime.now()
+            (e) => isSameDay(e.date, normalizeDate(selectedDate)),
+        orElse: () => throw Exception("No mood found for selected date"),
+      );
+
+      todayMood.feeling = feeling;
+      todayMood.updatedAt = DateTime.now();
+
+      await todayMood.save();
+      loadMoods();
+
+      print("debugs ====>:: ${storage.getAllMoodFeeling()}");
+      selectedFeelingIndex.value = -1;
+      Get.back();
     }
   }
 }

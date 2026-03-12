@@ -4,12 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:habitly/app/core/extensions/onboarding_texts.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
+import 'package:habitly/app/modules/mood_stat/controllers/mood_stat_history_controller.dart';
+import 'package:habitly/app/modules/mood_stat/models/mood_feeling_model.dart';
 import 'package:hive/hive.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../widgets/circular_point.dart';
 
-class MoodStatHistoryScreen extends StatelessWidget {
+class MoodStatHistoryScreen extends GetView<MoodStatHistoryController> {
   const MoodStatHistoryScreen({super.key});
 
   @override
@@ -42,17 +44,19 @@ class MoodStatHistoryScreen extends StatelessWidget {
     );
   }
 
-  Widget _titleWidget(BuildContext context) {
+  Widget _titleWidget(MoodFeelingModel mood) {
     return Row(
       children: [
         // mood text
-        _titleText('Great'),
+        _titleText(mood.title),
 
-        // circular bindu
-        CircularPoint(size: 5),
+        if (mood.feeling != null) ...[
+          // circular bindu
+          CircularPoint(size: 5),
 
-        // feeling
-        _titleText('Confident'),
+          // feeling
+          _titleText(mood.feeling!),
+        ],
       ],
     );
   }
@@ -75,19 +79,24 @@ class MoodStatHistoryScreen extends StatelessWidget {
   }
 
   Widget _bodyWidget() {
-    return ListView.separated(
-      itemBuilder: (context, index) => ListTile(
-        tileColor: AppColors.containerBackgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.w),
-        ),
-        leading: Text('😁', style: TextStyle(fontSize: 35.sp)),
-        title: _titleWidget(context),
-        subtitle: _subTitleWidget(),
+    return Obx(
+      () => ListView.separated(
+        itemBuilder: (context, index) {
+          final mood = controller.moods[index];
+          return ListTile(
+            tileColor: AppColors.containerBackgroundColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.w),
+            ),
+            leading: Text(mood.emoji, style: TextStyle(fontSize: 35.sp)),
+            title: _titleWidget(mood),
+            subtitle: _subTitleWidget(),
+          );
+        },
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        separatorBuilder: (context, index) => SizedBox(height: 12.h),
+        itemCount: controller.moods.length,
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      separatorBuilder: (context, index) => SizedBox(height: 12.h),
-      itemCount: 10,
     );
   }
 }

@@ -10,6 +10,7 @@ import 'package:habitly/app/core/utils/helpers/helper_function.dart';
 import 'package:habitly/app/modules/home/controllers/home_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/end_habit_on_widget.dart';
 import 'package:habitly/app/modules/mood_stat/controllers/mood_stat_controller.dart';
+import 'package:habitly/app/modules/mood_stat/widgets/calendar_view.dart';
 import 'package:habitly/app/modules/widgets/appbar/custom_appbar.dart';
 import 'package:habitly/app/modules/widgets/container/custom_card.dart';
 import 'package:hive/hive.dart';
@@ -77,80 +78,55 @@ class MoodStatScreen extends GetView<MoodStatController> {
     );
   }
 
+  AppBar _appBar() {
+    return AppBar(
+      leadingWidth: 48.w,
+      centerTitle: true,
+      leading: LeadingAppBarImageWidget(),
+      title: Text(AppStrings.moodStat),
+      actions: [
+        GestureDetector(
+          onTap: () => Get.toNamed(AppRoutes.moodStatHistory),
+          child: const Icon(Icons.history_rounded),
+        ),
+      ],
+    );
+  }
+
+  Widget _bodyWidget() {
+    return SingleChildScrollView(
+      child: CustomCard(
+        child:
+            Column(
+              children: [
+                /// calendar header [left, right btn, month name]
+                _customCalendarHeaderView(),
+
+                // Divider
+                Divider().paddingOnly(bottom: AppSpacing.md),
+
+                /// weekday [Mo, Tu, We, Th, Fr, Sa, Su]
+                _weekdayHeader().paddingOnly(bottom: AppSpacing.lg),
+
+                /// calendar view [EMOJI, DATES]
+                MoodCalendarView(),
+              ],
+            ).paddingOnly(
+              left: AppSpacing.sm,
+              right: AppSpacing.sm,
+              bottom: AppSpacing.lg,
+              top: AppSpacing.sm,
+            ),
+      ).paddingSymmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.md),
+    );
+  }
+
+  Widget _mainView() {
+    return Scaffold(appBar: _appBar(), body: _bodyWidget());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 48,
-        centerTitle: true,
-
-        leading: LeadingAppBarImageWidget(),
-        title: Text(AppStrings.moodStat),
-        actions: [
-          GestureDetector(
-            onTap: () => Get.toNamed(AppRoutes.moodStatHistory),
-            child: const Icon(Icons.history_rounded),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: CustomCard(
-          child:
-              Column(
-                children: [
-                  /// calendar header [left, right btn, month name]
-                  _customCalendarHeaderView(),
-
-                  // Divider
-                  Divider().paddingOnly(bottom: AppSpacing.md),
-
-                  /// weekday [Mo, Tu, We, Th, Fr, Sa, Su]
-                  _weekdayHeader().paddingOnly(bottom: AppSpacing.lg),
-
-                  /// calendar view [EMOJI, DATES]
-                  Obx(
-                    () => GridView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 7,
-                            mainAxisSpacing: 5,
-                            mainAxisExtent: 90,
-                          ),
-                      itemCount:
-                          controller.daysInMonth.value +
-                          controller.firstWeekday.value -
-                          1,
-                      itemBuilder: (context, index) {
-                        int day = index - controller.firstWeekday.value + 2;
-
-                        final date = DateTime(
-                          controller.selectedMonth.value.year,
-                          controller.selectedMonth.value.month,
-                          day,
-                        );
-                        final normalizedDate = normalizeDate(date);
-
-                        final mood = controller.moodMap[normalizedDate];
-
-                        if (mood != null) {
-                          return MoodDayTile(mood: mood);
-                        } else {
-                          return MoodDayTile(moodDate: date);
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ).paddingOnly(
-                left: AppSpacing.sm,
-                right: AppSpacing.sm,
-                bottom: AppSpacing.lg,
-                top: AppSpacing.sm,
-              ),
-        ).paddingSymmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.md),
-      ),
-    );
+    return _mainView();
   }
 }
