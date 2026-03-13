@@ -91,3 +91,17 @@ const String strSep = 'Sep';
 const String strOct = 'Oct';
 const String strNov = 'Nov';
 const String strDec = 'Dec';
+
+
+/// Mood summary labels
+const String strMoodTracked = 'Mood tracked';
+
+/// Motivational texts
+const String strStartTracking = 'Start tracking!';
+const String strKeepGoing = 'Keep going!';
+const String strGoodStreak = 'Good streak!';
+const String strAlmostThere = 'Almost there!';
+const String strPerfectMonth = 'Perfect month!';
+
+/// Summary format
+const String strMoodDaysLogged = 'of days logged';

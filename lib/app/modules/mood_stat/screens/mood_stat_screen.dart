@@ -35,29 +35,36 @@ class MoodStatScreen extends GetView<MoodStatController> {
 
   // showing Month and year let suppose [March 2026] and also left <-> right date selection
   Widget _customCalendarHeaderView() {
+    final now = DateTime.now();
     return Obx(
-      () => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: Icon(Icons.chevron_left_rounded),
-            onPressed: controller.previousMonth,
-          ),
-          GestureDetector(
-            onTap: controller.showMonthYearPicker,
-            child: Text(
-              DateClass.formatMonthYear(controller.selectedMonth.value),
-              style: Theme.of(
-                Get.context!,
-              ).textTheme.headlineSmall!.copyWith(fontSize: 16.sp),
+      () {
+        final selected = controller.selectedMonth.value;
+        final isCurrentMonth =
+            selected.year == now.year && selected.month == now.month;
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.chevron_left_rounded),
+              onPressed: controller.previousMonth,
             ),
-          ),
-          IconButton(
-            icon: Icon(Icons.chevron_right_rounded),
-            onPressed: controller.nextMonth,
-          ),
-        ],
-      ),
+            GestureDetector(
+              onTap: controller.showMonthYearPicker,
+              child: Text(
+                DateClass.formatMonthYear(controller.selectedMonth.value),
+                style: Theme.of(
+                  Get.context!,
+                ).textTheme.headlineSmall!.copyWith(fontSize: 16.sp),
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.chevron_right_rounded),
+              onPressed: isCurrentMonth ? null : controller.nextMonth,
+            ),
+          ],
+        );
+      },
     );
   }
 
