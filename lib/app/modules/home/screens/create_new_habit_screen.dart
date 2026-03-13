@@ -17,77 +17,84 @@ class CreateNewHabitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _mainView();
+  }
+
+  GetBuilder<CreateNewHabitController> _mainView() {
     return GetBuilder<CreateNewHabitController>(
       builder: (CreateNewHabitController controller) {
         return SafeArea(
           top: false,
-          child: Scaffold(
-            body: Column(
-              children: [
-                Expanded(
-                  child: NestedScrollView(
-                    headerSliverBuilder: (context, innerBoxIsScrolled) {
-                      return [
-                        SliverAppBar(
-                          leadingWidth: 48,
-                          centerTitle: true,
-                          automaticallyImplyLeading: false,
-                          leading: InkWell(
-                            onTap: () => Get.back(),
-                            child: Icon(CupertinoIcons.clear),
-                          ),
-                          title: Text(AppStrings.createNewHabit),
-                          pinned: true,
-                          bottom: PreferredSize(
-                            preferredSize: Size.fromHeight(50.h),
-                            child: Obx(() {
-                              // checking is first tab selected
-                              bool isRegularHabitSelected =
-                                  controller.selectedTabIndex.value == 0;
-
-                              return TabBarWidget(
-                                controller: controller.controller,
-                                tabs: [
-                                  CustomTabWidget(
-                                    isSelected: isRegularHabitSelected,
-                                    tabText: AppStrings.regularHabit,
-                                  ),
-                                  CustomTabWidget(
-                                    isSelected: !isRegularHabitSelected,
-                                    tabText: AppStrings.oneTimeTask,
-                                  ),
-                                ],
-                              );
-                            }),
-                          ),
-                        ),
-                      ];
-                    },
-                    body: TabBarView(
-                      controller: controller.controller,
-                      children: [
-                        CreateNewHabitTabChildWidget(isRegularHabit: true),
-                        CreateNewHabitTabChildWidget(isRegularHabit: false),
-                      ],
-                    ),
-                  ).paddingOnly(bottom: AppSpacing.bf),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: CustomElevatedButton(
-                    buttonText: AppStrings.save,
-                    onClick: () => controller.onSave(true),
-                  ),
-                ).paddingOnly(
-                  left: AppSpacing.bf,
-                  right: AppSpacing.bf,
-                  bottom: AppSpacing.bf,
-                ),
-              ],
-            ),
-          ),
+          child: Scaffold(body: _bodyWidget(controller)),
         );
       },
+    );
+  }
+
+  Column _bodyWidget(CreateNewHabitController controller) {
+    return Column(
+      children: [
+        Expanded(
+          child: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [_sliverAppBar(controller)];
+            },
+            body: TabBarView(
+              controller: controller.controller,
+              children: [
+                CreateNewHabitTabChildWidget(isRegularHabit: true),
+                CreateNewHabitTabChildWidget(isRegularHabit: false),
+              ],
+            ),
+          ).paddingOnly(bottom: AppSpacing.bf),
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: CustomElevatedButton(
+            buttonText: AppStrings.save,
+            onClick: () => controller.onSave(true),
+          ),
+        ).paddingOnly(
+          left: AppSpacing.bf,
+          right: AppSpacing.bf,
+          bottom: AppSpacing.bf,
+        ),
+      ],
+    );
+  }
+
+  SliverAppBar _sliverAppBar(CreateNewHabitController controller) {
+    return SliverAppBar(
+      leadingWidth: 48,
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      leading: InkWell(
+        onTap: () => Get.back(),
+        child: Icon(CupertinoIcons.clear),
+      ),
+      title: Text(AppStrings.createNewHabit),
+      pinned: true,
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(50.h),
+        child: Obx(() {
+          // checking is first tab selected
+          bool isRegularHabitSelected = controller.selectedTabIndex.value == 0;
+
+          return TabBarWidget(
+            controller: controller.controller,
+            tabs: [
+              CustomTabWidget(
+                isSelected: isRegularHabitSelected,
+                tabText: AppStrings.regularHabit,
+              ),
+              CustomTabWidget(
+                isSelected: !isRegularHabitSelected,
+                tabText: AppStrings.oneTimeTask,
+              ),
+            ],
+          );
+        }),
+      ),
     );
   }
 }

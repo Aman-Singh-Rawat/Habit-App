@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/state_manager.dart';
@@ -19,7 +20,7 @@ class MainScreen extends GetView<MainController> {
         Icons.emoji_emotions_rounded,
       ),
       (AppStrings.report, Iconsax.chart_21, Iconsax.chart_15),
-      (AppStrings.myHabits, Iconsax.element_plus, Iconsax.element_4),
+      (AppStrings.myHabits, Iconsax.element_3, Iconsax.element_3),
       (AppStrings.account, Iconsax.user4, Iconsax.user),
     ];
 

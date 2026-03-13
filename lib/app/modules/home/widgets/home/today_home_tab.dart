@@ -6,7 +6,7 @@ import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/modules/home/controllers/home_controller.dart';
 import 'package:habitly/app/modules/home/models/regular_habit.dart';
-import 'package:habitly/app/modules/home/widgets/goal_widget.dart';
+import 'package:habitly/app/modules/home/widgets/habit_tile.dart';
 import 'package:habitly/app/modules/home/widgets/home/skip_habit_content_widget.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:table_calendar/table_calendar.dart';

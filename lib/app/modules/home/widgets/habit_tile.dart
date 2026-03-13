@@ -8,11 +8,17 @@ import 'package:habitly/app/modules/home/models/base_habit.dart';
 import 'package:hive/hive.dart';
 import 'package:iconsax/iconsax.dart';
 
-class GoalWidget extends StatelessWidget {
+class HabitTile extends StatelessWidget {
   final BaseHabit habit;
   final bool isCompleted;
+  final bool isMyHabits;
 
-  const GoalWidget({super.key, required this.habit, this.isCompleted = false});
+  const HabitTile({
+    super.key,
+    required this.habit,
+    this.isCompleted = false,
+    this.isMyHabits = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +42,23 @@ class GoalWidget extends StatelessWidget {
           SizedBox(width: 14.w),
           Expanded(child: Text(habit.name, style: AppTextStyles.goalTitle)),
 
-          if (isCompleted)
-            Container(
-              padding: EdgeInsets.all(4.r),
-              decoration: BoxDecoration(
-                color: AppColors.success.s400,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(Icons.check, size: 13.w),
-            ),
+          if (isMyHabits)
+            Icon(
+              size: 26.w,
+              Icons.drag_indicator,
+              color: AppColors.darkScaffoldBacgroundColor,
+            )
+          else
+            isCompleted
+                ? Container(
+                    padding: EdgeInsets.all(4.r),
+                    decoration: BoxDecoration(
+                      color: AppColors.success.s400,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(Icons.check, size: 13.w),
+                  )
+                : SizedBox.shrink(),
         ],
       ),
     );

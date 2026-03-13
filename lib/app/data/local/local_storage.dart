@@ -25,6 +25,10 @@ class LocalStorage extends GetxController {
     return _regularBox.values.toList();
   }
 
+  List<OneTimeTask> getAllOneTimeTasksList() {
+    return _taskBox.values.toList();
+  }
+
   Future<void> addRegularHabit(RegularHabit habit) async {
     Get.printInfo(info: '\naddRegularHabit:: ${habit.toString()}\n');
     await _regularBox.add(habit);

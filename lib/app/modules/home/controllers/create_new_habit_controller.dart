@@ -483,9 +483,16 @@ class CreateNewHabitController extends GetxController
   }
 
   void onSave(bool isRegularHabit) {
-    if (!regularFormKey.currentState!.validate()) {
-      Toasts.warningToast(waring: strFieldsCannotBeEmpty);
-      return;
+    if (isRegularHabit) {
+      if (!regularFormKey.currentState!.validate()) {
+        Toasts.warningToast(waring: strFieldsCannotBeEmpty);
+        return;
+      }
+    } else {
+      if (!oneTimeFormKey.currentState!.validate()) {
+        Toasts.warningToast(waring: strFieldsCannotBeEmpty);
+        return;
+      }
     }
 
     if (selectedDayIndexList.length == 0 && selectedRepeatIndex.value == 0) {
