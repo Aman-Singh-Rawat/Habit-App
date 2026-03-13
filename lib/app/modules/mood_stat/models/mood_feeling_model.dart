@@ -33,7 +33,7 @@ class MoodFeelingModel extends HiveObject {
     required this.date,
     DateTime? createdAt,
     this.updatedAt, required this.emoji, required this.title,
-  }) : createdAt = createdAt ?? normalizeDate(DateTime.now());
+  }) : createdAt = createdAt ?? DateTime.now();
 
   @override
   String toString() {

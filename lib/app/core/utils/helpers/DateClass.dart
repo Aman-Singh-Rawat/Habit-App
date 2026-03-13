@@ -8,4 +8,8 @@ class DateClass {
   static String formatMonthYear(DateTime date) {
     return DateFormat('MMMM  yyyy').format(date);
   }
+
+  static String formatTime(DateTime date) {
+    return DateFormat('hh:mm a').format(date);
+  }
 }

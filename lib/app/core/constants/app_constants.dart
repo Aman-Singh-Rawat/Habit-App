@@ -37,6 +37,7 @@ const String strCompleted = 'Completed';
 const String strCompleteItWheneverYouReady =
     "Updated 🌿 Complete it whenever you're ready.";
 const String strToday = 'Today';
+const String strYesterday = 'Yesterday';
 const String strMood = 'Mood';
 const String strMissed = 'Missed';
 
