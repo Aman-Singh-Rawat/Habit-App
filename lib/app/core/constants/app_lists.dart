@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/constants/image_strings.dart';
@@ -133,5 +134,48 @@ class AppLists {
     strOct,
     strNov,
     strDec,
+  ];
+
+  static const List<Map<String, dynamic>> settingsList = [
+    {
+      "title": strPreferences,
+      "icon": Icons.settings_outlined,
+    },
+    {
+      "title": strPersonalInfo,
+      "icon": Icons.person_outline,
+    },
+    {
+      "title": strPaymentMethods,
+      "icon": Icons.credit_card_outlined,
+    },
+    {
+      "title": strBillingSubscriptions,
+      "icon": Icons.star_border,
+    },
+    {
+      "title": strAccountSecurity,
+      "icon": Icons.shield_outlined,
+    },
+    {
+      "title": strLinkedAccounts,
+      "icon": Icons.sync_alt,
+    },
+    {
+      "title": strAppAppearance,
+      "icon": Icons.remove_red_eye_outlined,
+    },
+    {
+      "title": strDataAnalytics,
+      "icon": Icons.analytics_outlined,
+    },
+    {
+      "title": strHelpSupport,
+      "icon": Icons.description_outlined,
+    },
+    {
+      "title": strLogout,
+      "icon": Icons.logout,
+    },
   ];
 }

@@ -11,6 +11,7 @@ import 'package:habitly/app/core/utils/toasts.dart';
 import 'package:habitly/app/data/local/local_storage.dart';
 import 'package:habitly/app/modules/home/controllers/home_controller.dart';
 import 'package:habitly/app/modules/home/models/regular_habit.dart';
+import 'package:habitly/app/modules/my_habits/controllers/my_habits_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Event {
@@ -247,13 +248,9 @@ class CreateNewHabitController extends GetxController
 
   void toggleAllDay(bool? flag) {
     final isChecked = flag ?? false;
-    dev.log("debugs:: $isChecked");
-
     if (isChecked) {
-      // ✅ select all
-      selectedDayIndexList.assignAll([0, 1, 2, 3, 4, 5, 6]);
+      selectedDayIndexList.assignAll([1, 2, 3, 4, 5, 6, 7]);
     } else {
-      // ✅ deselect all
       selectedDayIndexList.clear();
     }
   }
@@ -483,38 +480,81 @@ class CreateNewHabitController extends GetxController
   }
 
   void onSave(bool isRegularHabit) {
-    if (isRegularHabit) {
-      if (!regularFormKey.currentState!.validate()) {
-        Toasts.warningToast(waring: strFieldsCannotBeEmpty);
-        return;
-      }
-    } else {
-      if (!oneTimeFormKey.currentState!.validate()) {
-        Toasts.warningToast(waring: strFieldsCannotBeEmpty);
-        return;
-      }
-    }
+    if (!_validateForm(isRegularHabit)) return;
+    if (!_validateRepeatRules()) return;
+    if (!_validateEndDate()) return;
+    if (!_validateReminder(isRegularHabit)) return;
 
-    if (selectedDayIndexList.length == 0 && selectedRepeatIndex.value == 0) {
-      Toasts.warningToast(waring: strPleaseChooseAtLeastOneDay);
-      return;
-    }
-    if (selectedPerWeak.value == -1 && selectedRepeatIndex.value == 1) {
-      Toasts.warningToast(waring: strPleaseChooseNumberOfDays);
-      return;
-    }
-
-    if (multiSelectedDays.length == 0 && selectedRepeatIndex.value == 2) {
-      Toasts.warningToast(waring: strPleaseChooseAtLeastOneDay);
-      return;
-    }
-
-    String id =
+    final id =
         '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(999)}';
 
     if (isRegularHabit) {
       saveRegularHabit(id);
     }
+  }
+
+  bool _validateForm(bool isRegularHabit) {
+    final isValid = isRegularHabit
+        ? regularFormKey.currentState!.validate()
+        : oneTimeFormKey.currentState!.validate();
+
+    if (!isValid) {
+      Toasts.warningToast(waring: strFieldsCannotBeEmpty);
+      return false;
+    }
+    return true;
+  }
+
+  bool _validateRepeatRules() {
+    if (selectedDayIndexList.isEmpty && selectedRepeatIndex.value == 0) {
+      Toasts.warningToast(waring: strPleaseChooseAtLeastOneDay);
+      return false;
+    }
+
+    if (selectedPerWeak.value == -1 && selectedRepeatIndex.value == 1) {
+      Toasts.warningToast(waring: strPleaseChooseNumberOfDays);
+      return false;
+    }
+
+    if (multiSelectedDays.isEmpty && selectedRepeatIndex.value == 2) {
+      Toasts.warningToast(waring: strPleaseChooseAtLeastOneDay);
+      return false;
+    }
+
+    return true;
+  }
+
+  bool _validateEndDate() {
+    if (endHabitOn.value &&
+        (endHabitDatePickerController.text.isEmpty ||
+            endHabitDatePickerController.text == strSelectAnEndDate)) {
+      Toasts.warningToast(waring: pleaseChooseAnEndDateForTheHabit);
+      return false;
+    }
+
+    return true;
+  }
+
+  bool _validateReminder(bool isRegularHabit) {
+    if (isRegularHabit &&
+        setRegularReminder.value &&
+        (setReminderHabitTimeController.text.isEmpty ||
+            setReminderHabitTimeController.text ==
+                strPleaseSelectReminderTime)) {
+      Toasts.warningToast(waring: strPleaseSelectReminderTime);
+      return false;
+    }
+
+    if (!isRegularHabit &&
+        setOneTimeRegularReminder.value &&
+        (setReminderTaskTimeController.text.isEmpty ||
+            setReminderTaskTimeController.text ==
+                strPleaseSelectReminderTime)) {
+      Toasts.warningToast(waring: strPleaseSelectReminderTime);
+      return false;
+    }
+
+    return true;
   }
 
   void saveRegularHabit(String id) async {
@@ -523,10 +563,6 @@ class CreateNewHabitController extends GetxController
       Toasts.errorToast(err: strPleaseChooseAnIcon);
       return;
     }
-
-    print("Selected Color: ${selectedColor.value}");
-    print("ARGB: ${selectedColor.value.toARGB32()}");
-    print("HEX: ${selectedColor.value.toARGB32().toRadixString(16)}");
 
     /// TODO :: fix getRepeatDays;
     await LocalStorage.instance.addRegularHabit(
@@ -546,9 +582,41 @@ class CreateNewHabitController extends GetxController
 
     if (Get.isRegistered<HomeController>()) {
       HomeController.instance.loadHabits();
+      MyHabitsController.instance.loadData();
     }
     Get.back();
-    Get.log(LocalStorage.instance.getLastHabit().toString());
+    Toasts.successToast(msg: strSuccessfullyHabitAdded);
+  }
+
+  /// TODO:: IMPLEMENT THIS
+  void saveOneTimeTask(String id) async {
+    if (getRepeatType == null) return;
+    if (regularHabitIconSelectedIndex.value == -1) {
+      Toasts.errorToast(err: strPleaseChooseAnIcon);
+      return;
+    }
+
+    /// TODO :: fix getRepeatDays;
+    await LocalStorage.instance.addRegularHabit(
+      RegularHabit(
+        id: id,
+        name: habitController.text,
+        icon: EmojiList.icons[regularHabitIconSelectedIndex.value].emoji,
+        color: selectedColor.value.toARGB32().toRadixString(16).padLeft(8, '0'),
+        repeatType: getRepeatType!,
+        repeatDays: getRepeatDays(),
+        doItAt: doItAt(),
+        endDate: selectedDate.value,
+        reminderHour: reminderHour,
+        reminderMinute: reminderMinute,
+      ),
+    );
+
+    if (Get.isRegistered<HomeController>()) {
+      HomeController.instance.loadHabits();
+      MyHabitsController.instance.loadData();
+    }
+    Get.back();
     Toasts.successToast(msg: strSuccessfullyHabitAdded);
   }
 }

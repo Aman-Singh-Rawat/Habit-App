@@ -37,7 +37,7 @@ class CreateNewHabitScreen extends StatelessWidget {
         Expanded(
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [_sliverAppBar(controller)];
+              return [_sliverAppBar(controller, innerBoxIsScrolled)];
             },
             body: TabBarView(
               controller: controller.controller,
@@ -63,9 +63,12 @@ class CreateNewHabitScreen extends StatelessWidget {
     );
   }
 
-  SliverAppBar _sliverAppBar(CreateNewHabitController controller) {
+  SliverAppBar _sliverAppBar(
+    CreateNewHabitController controller,
+    bool innerBoxIsScrolled,
+  ) {
     return SliverAppBar(
-      leadingWidth: 48,
+      leadingWidth: 48.w,
       centerTitle: true,
       automaticallyImplyLeading: false,
       leading: InkWell(
@@ -74,8 +77,11 @@ class CreateNewHabitScreen extends StatelessWidget {
       ),
       title: Text(AppStrings.createNewHabit),
       pinned: true,
+      snap: true,
+      floating: true,
+      toolbarHeight: innerBoxIsScrolled ? 0 : kToolbarHeight,
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(50.h),
+        preferredSize: Size.fromHeight(54.h),
         child: Obx(() {
           // checking is first tab selected
           bool isRegularHabitSelected = controller.selectedTabIndex.value == 0;
@@ -92,7 +98,7 @@ class CreateNewHabitScreen extends StatelessWidget {
                 tabText: AppStrings.oneTimeTask,
               ),
             ],
-          );
+          ).paddingOnly(bottom: 10.h);
         }),
       ),
     );

@@ -43,4 +43,12 @@ class MyHabitsController extends GetxController
     regularHabitList.value = storage.getAllRegularHabits();
     oneTimeTaskList.value = storage.getAllOneTimeTasksList();
   }
+
+  void onReorder(int oldIndex, int newIndex) {
+    if (newIndex > oldIndex) newIndex--;
+
+    final item = regularHabitList.removeAt(oldIndex);
+    regularHabitList.insert(newIndex, item);
+    regularHabitList.save();
+  }
 }

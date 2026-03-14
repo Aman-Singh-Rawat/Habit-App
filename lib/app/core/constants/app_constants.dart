@@ -106,3 +106,18 @@ const String strPerfectMonth = 'Perfect month!';
 
 /// Summary format
 const String strMoodDaysLogged = 'of days logged';
+
+
+const String strPreferences = 'Preferences';
+const String strPersonalInfo = 'Personal Info';
+const String strPaymentMethods = 'Payment Methods';
+const String strBillingSubscriptions = 'Billing & Subscriptions';
+const String strAccountSecurity = 'Account & Security';
+const String strLinkedAccounts = 'Linked Accounts';
+const String strAppAppearance = 'App Appearance';
+const String strDataAnalytics = 'Data & Analytics';
+const String strHelpSupport = 'Help & Support';
+const String strLogout = 'Logout';
+
+
+const String pleaseChooseAnEndDateForTheHabit = 'Please choose an end date for the habit.';

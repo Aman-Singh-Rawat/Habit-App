@@ -68,8 +68,8 @@ class OnTheseDayWidget extends StatelessWidget {
                       height: 50,
                       fontSize: 25,
                       onItemClick: () =>
-                          controller.onSelectedDayChoose(letter.key),
-                      isSelected: controller.isSelectedDayContains(letter.key),
+                          controller.onSelectedDayChoose(letter.key+1),
+                      isSelected: controller.isSelectedDayContains(letter.key+1),
                       item: AppLists.weekDayPrefixLetter[letter.key],
                     ).paddingOnly(right: 10.w),
                   )

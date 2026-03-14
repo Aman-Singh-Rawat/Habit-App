@@ -20,7 +20,7 @@ class CustomCard extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: AppColors.containerColor,
-        borderRadius: BorderRadius.circular(AppSpacing.md.r),
+        borderRadius: BorderRadius.circular(AppSpacing.sm.r),
         boxShadow: [
           BoxShadow(
             color: AppColors.shadowColor,
