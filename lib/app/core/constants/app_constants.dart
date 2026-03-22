@@ -123,3 +123,23 @@ const String strLogout = 'Logout';
 
 
 const String pleaseChooseAnEndDateForTheHabit = 'Please choose an end date for the habit.';
+
+
+/// Account Screen Titles
+const String strAccount = 'Account';
+
+/// Section Labels
+const String strGeneral = 'General';
+const String strPrivacyAndSecurity = 'Privacy & Security';
+
+/// Popup Menu Labels (UI)
+const String strShareProfile = 'Share profile';
+const String strCopyEmail = 'Copy email';
+const String strDeleteAccount = 'Delete account';
+
+/// Popup Menu Values (Logic Keys)
+const String strShare = 'share';
+const String strCopy = 'copy';
+
+/// Actions
+const String strSignOut = 'Sign out';

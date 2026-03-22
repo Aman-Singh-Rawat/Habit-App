@@ -1,58 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/modules/widgets/container/custom_card.dart';
 
-import '../../core/constants/app_lists.dart';
-import '../../core/constants/app_strings.dart';
-import '../../core/theme/app_colors.dart';
-import '../widgets/appbar/leading_app_bar_image_widget.dart';
-
-PopupMenuItem<String> _popupItem(
-  BuildContext context, {
-  required String value,
-  required IconData icon,
-  required String label,
-  required Color iconBg,
-  required Color iconColor,
-  bool isDestructive = false,
-}) {
-  return PopupMenuItem(
-    value: value,
-    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-    child: Row(
-      children: [
-        Container(
-          width: 32.w,
-          height: 32.w,
-          decoration: BoxDecoration(
-            color: iconBg,
-            borderRadius: BorderRadius.circular(9.r),
-          ),
-          child: Icon(icon, size: 15.w, color: iconColor),
-        ),
-        SizedBox(width: 11.w),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 13.5.sp,
-            fontWeight: FontWeight.w600,
-            color: isDestructive ? const Color(0xFFC62828) : AppColors.textDark,
-          ),
-        ),
-      ],
-    ),
-  );
-}
+import '../../../core/constants/app_lists.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../widgets/appbar/leading_app_bar_image_widget.dart';
+import '../widgets/popup_item.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appBar(context),
-      body: _bodyWidget(context),
-    );
+    return Scaffold(appBar: _appBar(context), body: _bodyWidget(context));
   }
 
   AppBar _appBar(BuildContext context) {
@@ -63,7 +25,7 @@ class AccountScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       leading: const LeadingAppBarImageWidget(),
       title: Text(
-        AppStrings.account,
+        strAccount,
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
           fontWeight: FontWeight.w600,
           letterSpacing: -0.3,
@@ -78,8 +40,7 @@ class AccountScreen extends StatelessWidget {
           elevation: 8,
           shadowColor: Colors.black.withOpacity(0.10),
           color: Theme.of(context).colorScheme.surface,
-          icon:  Container(
-            margin: EdgeInsets.only(right: 12.w),
+          icon: Container(
             width: 36.w,
             height: 36.w,
             decoration: BoxDecoration(
@@ -94,39 +55,39 @@ class AccountScreen extends StatelessWidget {
           ),
           onSelected: (value) {
             switch (value) {
-              case 'share':
+              case strShare:
                 // Share.share('Check out my profile!');
                 break;
-              case 'copy':
+              case strCopy:
                 // Clipboard.setData(ClipboardData(text: userEmail));
                 break;
-              case 'delete':
+              case strDelete:
                 //_showDeleteDialog(context);
                 break;
             }
           },
           itemBuilder: (context) => [
-            _popupItem(
+            popupItem(
               context,
-              value: 'share',
+              value: strShare,
               icon: Icons.share_rounded,
-              label: 'Share profile',
+              label: strShareProfile,
               iconBg: const Color(0xFFEEF0FF),
               iconColor: const Color(0xFF6048BA),
             ),
-            _popupItem(
+            popupItem(
               context,
-              value: 'copy',
+              value: strCopy,
               icon: Icons.copy_rounded,
-              label: 'Copy email',
+              label: strCopyEmail,
               iconBg: const Color(0xFFE8F5E9),
               iconColor: const Color(0xFF388E3C),
             ),
-            _popupItem(
+            popupItem(
               context,
-              value: 'delete',
+              value: strDelete,
               icon: Icons.delete_outline_rounded,
-              label: 'Delete account',
+              label: strDeleteAccount,
               iconBg: const Color(0xFFFFEBEE),
               iconColor: const Color(0xFFC62828),
               isDestructive: true,
@@ -143,12 +104,11 @@ class AccountScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-          _sectionLabel(context, 'General'),
+          _sectionLabel(context, strGeneral),
           SizedBox(height: 10.h),
           _settingsGroup(context, AppLists.settingsList.sublist(0, 3)),
           SizedBox(height: 20.h),
-          _sectionLabel(context, 'Privacy & Security'),
+          _sectionLabel(context, strPrivacyAndSecurity),
           SizedBox(height: 10.h),
           _settingsGroup(context, AppLists.settingsList.sublist(3)),
           SizedBox(height: 20.h),
@@ -158,7 +118,6 @@ class AccountScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _sectionLabel(BuildContext context, String label) {
     return Padding(
@@ -179,7 +138,6 @@ class AccountScreen extends StatelessWidget {
     List<Map<String, dynamic>> items,
   ) {
     return CustomCard(
-
       child: Column(
         children: items.asMap().entries.map((entry) {
           final index = entry.key;
@@ -196,8 +154,8 @@ class AccountScreen extends StatelessWidget {
     Map<String, dynamic> item, {
     bool isLast = false,
   }) {
-    final Color iconBg = item['iconBg'] ?? const Color(0xFFE6F1FB);
-    final Color iconColor = item['iconColor'] ?? const Color(0xFF185FA5);
+    final Color iconBg = item['iconBg'] ?? AppColors.primary.withOpacity(0.12);
+    final Color iconColor = item['iconColor'] ?? AppColors.chetwode.s500;
 
     return Column(
       children: [
@@ -217,7 +175,12 @@ class AccountScreen extends StatelessWidget {
                     color: iconBg,
                     borderRadius: BorderRadius.circular(10.r),
                   ),
-                  child: Icon(item['icon'], size: 17.w, color: iconColor),
+                  child: Icon(
+                    item['icon'],
+                    size: 17.w,
+                    color: iconColor,
+                    fontWeight: .w500,
+                  ),
                 ),
                 SizedBox(width: 14.w),
                 Expanded(
@@ -302,7 +265,7 @@ class AccountScreen extends StatelessWidget {
               SizedBox(width: 14.w),
               Expanded(
                 child: Text(
-                  'Sign out',
+                  strSignOut,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
