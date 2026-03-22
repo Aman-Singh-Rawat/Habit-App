@@ -26,12 +26,13 @@ class OneTimeTask extends HiveObject implements BaseHabit {
   @HiveField(4)
   final DateTime scheduledDate;
 
+  @override
   @HiveField(5)
-  final int reminderHour;
+  final int? reminderHour;
 
+  @override
   @HiveField(6)
-  final int reminderMinute;
-
+  final int? reminderMinute;
 
   @HiveField(7)
   final List<DateTime> completedDates;
@@ -41,6 +42,10 @@ class OneTimeTask extends HiveObject implements BaseHabit {
 
   @HiveField(9)
   final DateTime? updatedAt;
+
+  @override
+  @HiveField(10)
+  final String doItAt;
 
   OneTimeTask({
     required this.id,
@@ -53,9 +58,17 @@ class OneTimeTask extends HiveObject implements BaseHabit {
     List<DateTime>? completedDates,
     DateTime? createdAt,
     this.updatedAt,
+    required this.doItAt,
   }) : completedDates = completedDates ?? [],
-        createdAt = createdAt ?? normalizeDate(DateTime.now());
+       createdAt = createdAt ?? normalizeDate(DateTime.now());
 
-  TimeOfDay get reminderTime =>
-      TimeOfDay(hour: reminderHour, minute: reminderMinute);
+  TimeOfDay? get reminderTime =>
+      (reminderHour != null && reminderMinute != null)
+      ? TimeOfDay(hour: reminderHour!, minute: reminderMinute!)
+      : null;
+
+  @override
+  String toString() {
+    return 'OneTimeTask{id: $id, name: $name, icon: $icon, color: $color, scheduledDate: $scheduledDate, reminderHour: $reminderHour, reminderMinute: $reminderMinute, completedDates: $completedDates, createdAt: $createdAt, updatedAt: $updatedAt, doItAt: $doItAt}';
+  }
 }

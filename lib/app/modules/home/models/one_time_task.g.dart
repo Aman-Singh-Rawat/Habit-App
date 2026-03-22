@@ -22,18 +22,19 @@ class OneTimeTaskAdapter extends TypeAdapter<OneTimeTask> {
       icon: fields[2] as String,
       color: fields[3] as String,
       scheduledDate: fields[4] as DateTime,
-      reminderHour: fields[5] as int,
-      reminderMinute: fields[6] as int,
+      reminderHour: fields[5] as int?,
+      reminderMinute: fields[6] as int?,
       completedDates: (fields[7] as List?)?.cast<DateTime>(),
       createdAt: fields[8] as DateTime?,
       updatedAt: fields[9] as DateTime?,
+      doItAt: fields[10] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, OneTimeTask obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class OneTimeTaskAdapter extends TypeAdapter<OneTimeTask> {
       ..writeByte(8)
       ..write(obj.createdAt)
       ..writeByte(9)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(10)
+      ..write(obj.doItAt);
   }
 
   @override

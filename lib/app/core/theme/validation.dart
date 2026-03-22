@@ -1,5 +1,7 @@
 import 'package:intl/intl.dart';
 
+import '../constants/app_constants.dart';
+
 /// VALIDATION CLASS
 class AValidator {
   /// Empty Text Validation
@@ -160,5 +162,35 @@ class AValidator {
     return null;
   }
 
-  // Add more custom validators as needed for your specific requirements.
+
+  static String? validateDate(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return strPleaseSelectADate;
+    }
+
+    if (value == strPleaseSelectADate) {
+      return strPleaseSelectAValidDate;
+    }
+
+    return null;
+  }
+
+  static String? validateDateTimeField({
+    required String? value,
+    required String defaultText,
+    bool shouldValidate = true,
+  }) {
+    if (!shouldValidate) return null;
+
+    if (value == null || value.trim().isEmpty) {
+      return strReminderTimeCanNotBeEmmpty;
+    }
+
+    if (value == defaultText) {
+      return strPleaseSelectReminderTime;
+    }
+
+    return null;
+  }
+
 }

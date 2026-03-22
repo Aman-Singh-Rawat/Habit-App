@@ -42,8 +42,14 @@ class CreateNewHabitScreen extends StatelessWidget {
             body: TabBarView(
               controller: controller.controller,
               children: [
-                CreateNewHabitTabChildWidget(isRegularHabit: true),
-                CreateNewHabitTabChildWidget(isRegularHabit: false),
+                CreateNewHabitTabChildWidget(
+                  key: PageStorageKey('regular'),
+                  isRegularHabit: true,
+                ),
+                CreateNewHabitTabChildWidget(
+                  key: PageStorageKey('oneTime'),
+                  isRegularHabit: false,
+                ),
               ],
             ),
           ).paddingOnly(bottom: AppSpacing.bf),
@@ -52,7 +58,7 @@ class CreateNewHabitScreen extends StatelessWidget {
           width: double.infinity,
           child: CustomElevatedButton(
             buttonText: AppStrings.save,
-            onClick: () => controller.onSave(true),
+            onClick: controller.onSave,
           ),
         ).paddingOnly(
           left: AppSpacing.bf,

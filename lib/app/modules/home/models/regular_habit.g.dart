@@ -23,7 +23,7 @@ class RegularHabitAdapter extends TypeAdapter<RegularHabit> {
       color: fields[3] as String,
       repeatType: fields[4] as String,
       repeatDays: fields[5] as dynamic,
-      doItAt: fields[6] as String?,
+      doItAt: fields[6] as String,
       endDate: fields[7] as DateTime?,
       reminderHour: fields[8] as int?,
       reminderMinute: fields[9] as int?,

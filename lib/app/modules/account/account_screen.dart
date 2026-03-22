@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:habitly/app/modules/widgets/container/custom_card.dart';
 
 import '../../core/constants/app_lists.dart';

@@ -5,6 +5,7 @@ import 'package:get/get_utils/src/extensions/widget_extensions.dart';
 import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/extensions/secondary_button_text.dart';
+import 'package:habitly/app/core/theme/validation.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/custom_calendar_widget.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/end_habit_on_widget.dart';
@@ -26,6 +27,7 @@ class WhenWidget extends StatelessWidget {
         SectionTitle(text: AppStrings.when).paddingOnly(bottom: AppSpacing.lg),
         DateTimeFieldWidget(
           controller: controller.whenController,
+          validator: AValidator.validateDate,
           onTap: () => showCalendarBottomSheet(
             context: context,
             child: Column(

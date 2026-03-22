@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:habitly/app/core/constants/app_constants.dart';
+import 'package:habitly/app/core/logger/app_logger.dart';
 import 'package:habitly/app/modules/home/models/base_habit.dart';
 import 'package:habitly/app/modules/home/models/one_time_task.dart';
 import 'package:habitly/app/modules/home/models/regular_habit.dart';
@@ -30,11 +31,12 @@ class LocalStorage extends GetxController {
   }
 
   Future<void> addRegularHabit(RegularHabit habit) async {
-    Get.printInfo(info: '\naddRegularHabit:: ${habit.toString()}\n');
+    AppLogger.local(habit.toString(), );
     await _regularBox.add(habit);
   }
 
   Future<void> addOneTimeTask(OneTimeTask task) async {
+    AppLogger.local(task.toString(), );
     await _taskBox.add(task);
   }
 

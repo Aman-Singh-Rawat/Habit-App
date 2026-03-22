@@ -6,9 +6,7 @@ import 'package:habitly/app/modules/mood_stat/show_mood_emoji_stat.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../core/constants/app_constants.dart';
-import '../../../core/constants/app_strings.dart';
 import '../../../core/theme/app_colors.dart';
-import '../models/mood_calendar.dart';
 
 class MoodDayTile extends StatelessWidget {
   final DateTime date;

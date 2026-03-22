@@ -5,7 +5,9 @@ const String strMoodFeeling = 'moodFeeling';
 
 /// others
 const String strPleaseSelectReminderTime = 'Please Select Reminder Time';
-const String strPleaseSelectADate = 'Please Select a Date';
+const String strReminderTimeCanNotBeEmmpty = 'Reminder time cannot be empty';
+const String strPleaseSelectADate = 'Please select a Date';
+const String strPleaseSelectAValidDate = 'Please select a valid Date';
 const String strSelectAnEndDate = 'Select an end date';
 const String strSelectDurationInDays = 'Select duration in days';
 const String strWarning = 'Warning';

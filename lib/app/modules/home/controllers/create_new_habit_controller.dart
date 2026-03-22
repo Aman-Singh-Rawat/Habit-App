@@ -10,9 +10,12 @@ import 'package:habitly/app/core/utils/helpers/DateClass.dart';
 import 'package:habitly/app/core/utils/toasts.dart';
 import 'package:habitly/app/data/local/local_storage.dart';
 import 'package:habitly/app/modules/home/controllers/home_controller.dart';
+import 'package:habitly/app/modules/home/models/one_time_task.dart';
 import 'package:habitly/app/modules/home/models/regular_habit.dart';
 import 'package:habitly/app/modules/my_habits/controllers/my_habits_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../../../core/utils/app_enums.dart';
 
 class Event {
   String title;
@@ -106,6 +109,8 @@ class CreateNewHabitController extends GetxController
   final regularFormKey = GlobalKey<FormState>();
   final oneTimeFormKey = GlobalKey<FormState>();
 
+  final RxBool isColorPickerSelected = false.obs;
+
   /// Functions
   @override
   void onInit() {
@@ -123,6 +128,7 @@ class CreateNewHabitController extends GetxController
     controller.addListener(() {
       if (!controller.indexIsChanging) {
         selectedTabIndex.value = controller.index;
+        //regularHabitIconSelectedIndex.value = -1;
       }
     });
 
@@ -217,12 +223,14 @@ class CreateNewHabitController extends GetxController
   void onColorSelected(int index) {
     selectedColor.value = AppLists.habitlyColors[index];
     selectedColorIndex.value = index;
+    isColorPickerSelected.value = false;
     debugPrint("debug:: onColorSelected:: $index");
   }
 
   void onColorChanged(Color color) {
     selectedColor.value = color;
-    selectedColorIndex.value = 0;
+    selectedColorIndex.value = 14;
+    isColorPickerSelected.value = true;
   }
 
   void onSelectedDayChoose(int index) {
@@ -479,7 +487,9 @@ class CreateNewHabitController extends GetxController
     return _doItAtTypes[selectedDoItAtIndex.value];
   }
 
-  void onSave(bool isRegularHabit) {
+  void onSave() {
+    bool isRegularHabit = selectedTabIndex.value == 0;
+
     if (!_validateForm(isRegularHabit)) return;
     if (!_validateRepeatRules()) return;
     if (!_validateEndDate()) return;
@@ -488,9 +498,8 @@ class CreateNewHabitController extends GetxController
     final id =
         '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(999)}';
 
-    if (isRegularHabit) {
-      saveRegularHabit(id);
-    }
+    /// saving values
+    isRegularHabit ? saveRegularHabit(id) : saveOneTimeTask(id);
   }
 
   bool _validateForm(bool isRegularHabit) {
@@ -573,7 +582,7 @@ class CreateNewHabitController extends GetxController
         color: selectedColor.value.toARGB32().toRadixString(16).padLeft(8, '0'),
         repeatType: getRepeatType!,
         repeatDays: getRepeatDays(),
-        doItAt: doItAt(),
+        doItAt: DoItAtEnum.values[selectedDoItAtIndex.value].name,
         endDate: selectedDate.value,
         reminderHour: reminderHour,
         reminderMinute: reminderMinute,
@@ -590,25 +599,21 @@ class CreateNewHabitController extends GetxController
 
   /// TODO:: IMPLEMENT THIS
   void saveOneTimeTask(String id) async {
-    if (getRepeatType == null) return;
     if (regularHabitIconSelectedIndex.value == -1) {
       Toasts.errorToast(err: strPleaseChooseAnIcon);
       return;
     }
 
-    /// TODO :: fix getRepeatDays;
-    await LocalStorage.instance.addRegularHabit(
-      RegularHabit(
+    await LocalStorage.instance.addOneTimeTask(
+      OneTimeTask(
         id: id,
-        name: habitController.text,
+        name: taskController.text,
         icon: EmojiList.icons[regularHabitIconSelectedIndex.value].emoji,
         color: selectedColor.value.toARGB32().toRadixString(16).padLeft(8, '0'),
-        repeatType: getRepeatType!,
-        repeatDays: getRepeatDays(),
-        doItAt: doItAt(),
-        endDate: selectedDate.value,
+        scheduledDate: normalizeDate(whenSelectedDate.value!),
         reminderHour: reminderHour,
         reminderMinute: reminderMinute,
+        doItAt: DoItAtEnum.values[selectedDoItAtIndex.value].name,
       ),
     );
 

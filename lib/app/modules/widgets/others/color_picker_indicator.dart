@@ -1,6 +1,6 @@
  import 'package:flutter/material.dart';
 
-Widget colorPickerIndicator() {
+Widget colorPickerIndicator({Widget? widget}) {
     return Container(
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
@@ -24,6 +24,7 @@ Widget colorPickerIndicator() {
           ],
         ),
       ),
+      child: widget,
       //child: const Center(child: Icon(Icons.color_lens, color: Colors.white)),
     );
   }

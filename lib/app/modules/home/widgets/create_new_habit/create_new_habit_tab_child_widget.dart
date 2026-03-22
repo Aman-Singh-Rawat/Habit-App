@@ -20,6 +20,7 @@ import 'package:habitly/app/modules/widgets/texts/screen_section_title_and_actio
 
 class CreateNewHabitTabChildWidget extends StatelessWidget {
   final bool isRegularHabit;
+
   const CreateNewHabitTabChildWidget({super.key, required this.isRegularHabit});
 
   Widget get getWhenOrRegularWidget {
@@ -57,10 +58,11 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PrimaryTextFieldAndLabel(
-              validator: (value) => AValidator.validateEmptyText(
-                isRegularHabit ? 'Habit Name' : 'Task Name',
-                value,
-              ),
+              validator: (value) =>
+                  AValidator.validateEmptyText(
+                    isRegularHabit ? 'Habit Name' : 'Task Name',
+                    value,
+                  ),
               title: isRegularHabit
                   ? AppStrings.habitName
                   : AppStrings.taskName,
@@ -100,21 +102,35 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
 
             // set reminder
             Obx(
-              () => SetReminderWidget(
-                isSwitchSelected: isRegularHabit
-                    ? controller.setRegularReminder.value
-                    : controller.setOneTimeRegularReminder.value,
-                textEditingController: isRegularHabit
-                    ? controller.setReminderHabitTimeController
-                    : controller.setReminderTaskTimeController,
-                onReminderChanged: isRegularHabit
-                    ? controller.onSetReminder
-                    : controller.onOneTimeSetReminder,
-              ),
+                  () {
+                return SetReminderWidget(
+                  shouldValidate: isSwitchSelected,
+                  isSwitchSelected: isRegularHabit
+                      ? controller.setRegularReminder.value
+                      : controller.setOneTimeRegularReminder.value,
+                  textEditingController: isRegularHabit
+                      ? controller.setReminderHabitTimeController
+                      : controller.setReminderTaskTimeController,
+                  onReminderChanged: isRegularHabit
+                      ? controller.onSetReminder
+                      : controller.onOneTimeSetReminder,
+                );
+              },
             ),
           ],
         ).paddingOnly(top: 25.h),
       ),
     );
+  }
+
+  bool get isSwitchSelected {
+    final controller = CreateNewHabitController.instance;
+    if (isRegularHabit && controller.setRegularReminder.value) {
+      return true;
+    } else if (controller.setOneTimeRegularReminder.value) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

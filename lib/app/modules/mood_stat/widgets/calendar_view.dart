@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:habitly/app/modules/mood_stat/controllers/mood_stat_controller.dart';
 
-import '../../../core/constants/app_constants.dart';
-import '../../../core/theme/app_colors.dart';
 import 'mood_day_tile.dart';
 import 'mood_summary_strip.dart';
 

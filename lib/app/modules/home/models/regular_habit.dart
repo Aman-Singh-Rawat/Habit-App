@@ -29,15 +29,18 @@ class RegularHabit extends HiveObject implements BaseHabit {
   @HiveField(5)
   final dynamic repeatDays;
 
+  @override
   @HiveField(6)
-  final String? doItAt;
+  final String doItAt;
 
   @HiveField(7)
   final DateTime? endDate;
 
+  @override
   @HiveField(8)
   final int? reminderHour;
 
+  @override
   @HiveField(9)
   final int? reminderMinute;
 
@@ -60,7 +63,7 @@ class RegularHabit extends HiveObject implements BaseHabit {
     required this.color,
     required this.repeatType,
     required this.repeatDays,
-    this.doItAt,
+    required this.doItAt,
     this.endDate,
     required this.reminderHour,
     required this.reminderMinute,

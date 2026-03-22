@@ -1,6 +1,4 @@
-import 'package:habitly/app/modules/mood_stat/models/mood.dart';
 import 'package:hive/hive.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 part 'mood_feeling_model.g.dart';
 

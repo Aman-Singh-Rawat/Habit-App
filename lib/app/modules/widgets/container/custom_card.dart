@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/utils/helpers/helper_function.dart';
 
 class CustomCard extends StatelessWidget {
   final Widget child;

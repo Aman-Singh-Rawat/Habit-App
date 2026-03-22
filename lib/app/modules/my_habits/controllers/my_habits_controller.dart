@@ -49,6 +49,6 @@ class MyHabitsController extends GetxController
 
     final item = regularHabitList.removeAt(oldIndex);
     regularHabitList.insert(newIndex, item);
-    regularHabitList.save();
+    //regularHabitList.save();
   }
 }

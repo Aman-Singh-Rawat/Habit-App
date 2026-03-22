@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:habitly/app/core/constants/text_styles.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/core/utils/helpers/helper_function.dart';
 import 'package:habitly/app/modules/home/models/base_habit.dart';
-import 'package:hive/hive.dart';
-import 'package:iconsax/iconsax.dart';
 
 class HabitTile extends StatelessWidget {
   final BaseHabit habit;

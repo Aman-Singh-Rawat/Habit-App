@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:habitly/app/core/extensions/onboarding_texts.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/core/utils/helpers/DateClass.dart';
 import 'package:habitly/app/modules/mood_stat/controllers/mood_stat_history_controller.dart';
@@ -9,7 +8,6 @@ import 'package:habitly/app/modules/mood_stat/models/mood_feeling_model.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../core/constants/app_constants.dart';
-import '../../widgets/circular_point.dart';
 
 class MoodStatHistoryScreen extends GetView<MoodStatHistoryController> {
   const MoodStatHistoryScreen({super.key});

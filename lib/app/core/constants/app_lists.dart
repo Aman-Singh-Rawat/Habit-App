@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/constants/image_strings.dart';
 import 'package:habitly/app/modules/onboarding/models/onboarding_model.dart';
