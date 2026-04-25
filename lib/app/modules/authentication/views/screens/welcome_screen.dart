@@ -43,7 +43,7 @@ class WelcomeScreen extends GetView<WelcomeController> {
 
               /// get started text [TITLE]
               Text(
-                AppStrings.letsGetStarted,
+                AppStrings.letsGetStarted.tr,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.onboardingTitle.copyWith(
                   color: context.onboardingTitleColor,
@@ -54,7 +54,7 @@ class WelcomeScreen extends GetView<WelcomeController> {
 
               // subtitle
               Text(
-                AppStrings.letsDiveInInto,
+                AppStrings.letsDiveInInto.tr,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.onboardingSubtitle.copyWith(
                   color: context.onboardingSubtitleColor,
@@ -124,7 +124,7 @@ class WelcomeScreen extends GetView<WelcomeController> {
                       textColor: isDark ? AppColors.white : AppColors.primary,
                       backgroundColor: isDark
                           ? AppColors.darkSecondaryColor
-                          : AppColors.primaryLight,
+                          : AppColors.primary.withOpacity(0.1),
                     ),
                   ),
                 ],
@@ -132,6 +132,7 @@ class WelcomeScreen extends GetView<WelcomeController> {
 
               const SizedBox(height: 45),
 
+              /// privacy policy & terms of service
               PrivacyPolicyAndTermsOfUseWidget(),
             ],
           ),

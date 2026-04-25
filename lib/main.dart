@@ -36,7 +36,7 @@ Future<void> initMain() async {
 
   await Hive.initFlutter();
 
-  await Hive.deleteFromDisk();
+  //await Hive.deleteFromDisk();
 
   Hive.registerAdapter(RegularHabitAdapter());
   Hive.registerAdapter(OneTimeTaskAdapter());

@@ -129,7 +129,7 @@ class AppTextStyles {
   );
 
   static final onboardingTitle = TextStyle(
-    fontSize: 25.sp,
+    fontSize: 24.sp,
     fontWeight: FontWeight.bold,
     height: 1.7,
     color: AppColors.textDark,

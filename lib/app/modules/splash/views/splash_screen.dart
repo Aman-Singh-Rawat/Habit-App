@@ -7,12 +7,13 @@ import 'package:habitly/app/core/constants/image_strings.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/modules/splash/controllers/splash_controller.dart';
 
+import '../../../core/values/app_values.dart';
+
 class SplashScreen extends GetView<SplashController> {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    print("hellow");
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -23,15 +24,16 @@ class SplashScreen extends GetView<SplashController> {
             children: [
               Image.asset(
                 ImageStrings.splashLogo,
-                width: 200,
-                height: 200,
+                width: width_170,
+                height: width_170,
                 fit: BoxFit.contain,
               ),
               Text(
                 AppStrings.habitly,
                 style: TextStyle(
+                  height: 1,
                   color: AppColors.white,
-                  fontSize: 40,
+                  fontSize: font_35,
                   fontWeight: FontWeight.w500,
                 ),
               ),

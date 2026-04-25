@@ -31,7 +31,10 @@ class OnboardingScreenMainContent extends StatelessWidget {
               Expanded(
                 child: Stack(
                   children: [
-                    OnboardingPageViewBuilder(),
+                    Container(
+                      color: AppColors.primary,
+                      child: OnboardingPageViewBuilder(),
+                    ),
 
                     OnboardingThreeIndicators(),
                   ],

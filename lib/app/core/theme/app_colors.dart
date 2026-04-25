@@ -49,16 +49,17 @@ class AppColors {
   static const Color textFieldBackground = Color(0xFFFAFAFA);
   static const Color dividerColor = Color(0xFFf1f1f0);
   static const Color borderColor = Color(0xFFf3f3f2);
+  static const Color lightBorderColor = Color(0xFFEDECEC);
   static const Color white = Color(0xFFFFFFFF);
   static const Color indicatorGrey = Color(0xFFededee);
   static const Color textGrey = Color(0xFF616161);
   static const Color textDark = Color(0xFF212021);
   static const Color unprogressColor = Color(0xFFEEEEEE);
-  static const Color scaffoldBackgroundColor = Color(0xFFF5F5F5);
+  static const Color scaffoldBackgroundColor = Color(0xFFF2F2F2);
 
   /// primaries
   static const Color primary = Color(0xFF8985e9);
-  static const Color primaryLight = Color(0xFFf6f5fd);
+  static const Color primaryLight = Color(0xFFF6F5FD);
   static const Color primaryDark = Color(0xFF6e6aba);
 
   /// [DARK] Theme

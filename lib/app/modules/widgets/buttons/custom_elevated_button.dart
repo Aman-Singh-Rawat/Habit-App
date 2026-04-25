@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/core/constants/text_styles.dart';
 
@@ -27,7 +28,7 @@ class CustomElevatedButton extends StatelessWidget {
         shape: shape,
       ),
       child: Text(
-        buttonText,
+        buttonText.tr,
         style: AppTextStyles.buttonStyle.copyWith(color: textColor),
       ),
     );

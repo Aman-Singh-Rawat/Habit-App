@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/core/utils/helpers/helper_function.dart';
 
@@ -23,7 +25,7 @@ class SocialButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: double.infinity,
-        height: 55,
+        height: 55.h,
         decoration: BoxDecoration(
           color: isDarkMode
               ? AppColors.containerBackgroundColor
@@ -31,22 +33,22 @@ class SocialButton extends StatelessWidget {
           border: Border.all(
             color: isDarkMode
                 ? AppColors.darkSecondaryColor
-                : AppColors.borderColor,
-            width: 1.2,
+                : AppColors.lightBorderColor,
+            width: 1.5,
           ),
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(40.r),
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 17.0),
+            padding: EdgeInsets.symmetric(horizontal: 17.0.w),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SvgPicture.asset(
                   iconPath,
                   fit: BoxFit.contain,
-                  width: 22,
-                  height: 22,
+                  width: 22.w,
+                  height: 22.h,
                   colorFilter: iconColor != null
                       ? ColorFilter.mode(iconColor!, BlendMode.srcIn)
                       : null,
@@ -54,9 +56,9 @@ class SocialButton extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: Text(
-                      buttonText,
+                      buttonText.tr,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: isDarkMode
                             ? AppColors.white
                             : AppColors.textDark,

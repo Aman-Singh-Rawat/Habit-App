@@ -49,7 +49,7 @@ class OnboardingBottomWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CustomElevatedButton(
-                            buttonText: AppStrings.letsGetStarted,
+                            buttonText: AppStrings.letsGetStarted.tr,
                             onClick: () => Get.toNamed(AppRoutes.welcome),
                           ),
                         ),

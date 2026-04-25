@@ -29,7 +29,7 @@ class SignupScreen extends GetView<SignupController> {
 
               // signup title
               Text(
-                AppStrings.joinhabitlyTitle,
+                AppStrings.joinhabitlyTitle.tr,
                 textAlign: TextAlign.start,
                 style: AppTextStyles.onboardingTitle.copyWith(
                   color: context.onboardingTitleColor,
@@ -40,7 +40,7 @@ class SignupScreen extends GetView<SignupController> {
 
               // signup subtitle
               Text(
-                AppStrings.joinhabitlySubtitle,
+                AppStrings.joinhabitlySubtitle.tr,
                 textAlign: TextAlign.start,
                 style: AppTextStyles.onboardingSubtitle.copyWith(
                   color: context.onboardingSubtitleColor,
@@ -57,7 +57,7 @@ class SignupScreen extends GetView<SignupController> {
                   children: [
                     // email
                     PrimaryTextFieldAndLabel(
-                      title: AppStrings.email,
+                      title: AppStrings.email.tr,
                       controller: controller.email,
                       icon: Icons.mail_outline_rounded,
                     ),

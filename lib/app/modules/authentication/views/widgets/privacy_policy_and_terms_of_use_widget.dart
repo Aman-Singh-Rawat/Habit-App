@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/core/utils/helpers/helper_function.dart';
@@ -17,7 +18,7 @@ class PrivacyPolicyAndTermsOfUseWidget extends StatelessWidget {
       children: [
         // privacy policy
         Text(
-          AppStrings.privacyPolicy,
+          AppStrings.privacyPolicy.tr,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w400,
@@ -35,7 +36,7 @@ class PrivacyPolicyAndTermsOfUseWidget extends StatelessWidget {
 
         // Terms of Service
         Text(
-          AppStrings.termsOfService,
+          AppStrings.termsOfService.tr,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w400,
