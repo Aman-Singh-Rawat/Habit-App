@@ -38,7 +38,7 @@ class habitlyApp extends StatelessWidget {
             initialBinding: AppBindings(),
             title: AppStrings.habitly,
             debugShowCheckedModeBanner: false,
-            initialRoute: AppRoutes.splash,
+            initialRoute: AppRoutes.main,
             getPages: AppPages.pages,
             theme: AppTheme.light,
             darkTheme: AppTheme.dark,

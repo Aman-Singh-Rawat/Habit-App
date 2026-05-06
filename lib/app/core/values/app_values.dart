@@ -159,6 +159,7 @@ double width_13 = 13.0.w;
 double width_14 = 14.0.w;
 double width_15 = 15.0.w;
 double width_16 = 16.0.w;
+double width_17 = 17.0.w;
 double width_18 = 18.0.w;
 double width_20 = 20.0.w;
 double width_22 = 22.0.w;

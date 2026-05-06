@@ -136,45 +136,42 @@ class AppLists {
   ];
 
   static const List<Map<String, dynamic>> settingsList = [
-    {
-      "title": strPreferences,
-      "icon": Icons.settings_outlined,
-    },
-    {
-      "title": strPersonalInfo,
-      "icon": Icons.person_outline,
-    },
-    {
-      "title": strPaymentMethods,
-      "icon": Icons.credit_card_outlined,
-    },
-    {
-      "title": strBillingSubscriptions,
-      "icon": Icons.star_border,
-    },
-    {
-      "title": strAccountSecurity,
-      "icon": Icons.shield_outlined,
-    },
-    {
-      "title": strLinkedAccounts,
-      "icon": Icons.sync_alt,
-    },
-    {
-      "title": strAppAppearance,
-      "icon": Icons.remove_red_eye_outlined,
-    },
-    {
-      "title": strDataAnalytics,
-      "icon": Icons.analytics_outlined,
-    },
-    {
-      "title": strHelpSupport,
-      "icon": Icons.description_outlined,
-    },
-    {
-      "title": strLogout,
-      "icon": Icons.logout,
-    },
+    {"title": strPreferences, "icon": Icons.settings_outlined},
+    {"title": strPersonalInfo, "icon": Icons.person_outline},
+    {"title": strPaymentMethods, "icon": Icons.credit_card_outlined},
+    {"title": strBillingSubscriptions, "icon": Icons.star_border},
+    {"title": strAccountSecurity, "icon": Icons.shield_outlined},
+    {"title": strLinkedAccounts, "icon": Icons.sync_alt},
+    {"title": strAppAppearance, "icon": Icons.remove_red_eye_outlined},
+    {"title": strDataAnalytics, "icon": Icons.analytics_outlined},
+    {"title": strHelpSupport, "icon": Icons.description_outlined},
+  ];
+
+  static const List<String> appLanguagesNameList = [
+    strEnglish,
+    strHindi,
+    strPunjabi,
+    strBengali,
+    strGujarati,
+    strMarathi,
+    strTamil,
+    strTelugu,
+    strKannada,
+    strMalayalam,
+    strUrdu,
+    strOdia,
+    strAssamese,
+    strSanskrit,
+    strSpanish,
+    strFrench,
+    strGerman,
+    strChinese,
+    strJapanese,
+    strKorean,
+    strArabic,
+    strRussian,
+    strPortuguese,
+    strItalian,
+    strTurkish,
   ];
 }

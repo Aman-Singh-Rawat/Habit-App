@@ -165,4 +165,10 @@ class AppTextStyles {
     color: Colors.black,
     fontSize: 11.sp,
   );
+
+  static final accountSectionTitle = TextStyle(
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.0,
+    fontSize: 9.sp,
+  );
 }

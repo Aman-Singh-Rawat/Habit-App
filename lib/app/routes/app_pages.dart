@@ -1,5 +1,9 @@
+import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:habitly/app/core/constants/app_routes.dart';
+import 'package:habitly/app/modules/account/bindings/app_language_binding.dart';
+import 'package:habitly/app/modules/account/screens/app_appearance_screen.dart';
+import 'package:habitly/app/modules/account/screens/app_language_screen.dart';
 import 'package:habitly/app/modules/authentication/bindings/forgot_password_binding.dart';
 import 'package:habitly/app/modules/authentication/bindings/sign_in_binding.dart';
 import 'package:habitly/app/modules/authentication/bindings/signup_binding.dart';
@@ -125,6 +129,19 @@ class AppPages {
       name: AppRoutes.moodStatHistory,
       page: () => MoodStatHistoryScreen(),
       binding: MoodStatHistoryBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.appAppearance,
+      page: () => AppAppearanceScreen(),
+      transition: Transition.rightToLeft
+    ),
+
+    GetPage(
+        name: AppRoutes.appLanguage,
+        page: () => AppLanguageScreen(),
+        binding: AppLanguageBinding(),
+        transition: Transition.rightToLeft
     ),
   ];
 }

@@ -18,9 +18,10 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       leading: showLeading
           ? IconButton(
-              icon: const Icon(Iconsax.arrow_left),
+              icon: const Icon(Icons.arrow_back_ios_rounded),
               onPressed: onBack ?? () => Navigator.pop(context),
             )
           : null,

@@ -20,4 +20,8 @@ class AppRoutes {
   static const createNewHabit = '/create-new-habit';
   static const home = '/home';
   static const moodStatHistory = '/mood-stat-history';
+
+  /// account
+  static const appAppearance = "/app-appearance";
+  static const appLanguage = "/app-language";
 }

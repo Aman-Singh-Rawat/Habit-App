@@ -95,7 +95,6 @@ const String strOct = 'Oct';
 const String strNov = 'Nov';
 const String strDec = 'Dec';
 
-
 /// Mood summary labels
 const String strMoodTracked = 'Mood tracked';
 
@@ -109,7 +108,6 @@ const String strPerfectMonth = 'Perfect month!';
 /// Summary format
 const String strMoodDaysLogged = 'of days logged';
 
-
 const String strPreferences = 'Preferences';
 const String strPersonalInfo = 'Personal Info';
 const String strPaymentMethods = 'Payment Methods';
@@ -121,9 +119,8 @@ const String strDataAnalytics = 'Data & Analytics';
 const String strHelpSupport = 'Help & Support';
 const String strLogout = 'Logout';
 
-
-const String pleaseChooseAnEndDateForTheHabit = 'Please choose an end date for the habit.';
-
+const String pleaseChooseAnEndDateForTheHabit =
+    'Please choose an end date for the habit.';
 
 /// Account Screen Titles
 const String strAccount = 'Account';
@@ -143,3 +140,39 @@ const String strCopy = 'copy';
 
 /// Actions
 const String strSignOut = 'Sign out';
+
+/// App Appearance
+const String strTheme = 'Theme';
+const String strAppLanguage = 'App Language';
+const String strLight = 'Light';
+const String strDark = 'Dark';
+
+/// App Languages
+const String strEnglishUs = 'English (US)';
+
+const String strEnglish = 'English';
+const String strHindi = 'Hindi';
+const String strPunjabi = 'Punjabi';
+const String strBengali = 'Bengali';
+const String strGujarati = 'Gujarati';
+const String strMarathi = 'Marathi';
+const String strTamil = 'Tamil';
+const String strTelugu = 'Telugu';
+const String strKannada = 'Kannada';
+const String strMalayalam = 'Malayalam';
+const String strUrdu = 'Urdu';
+const String strOdia = 'Odia';
+const String strAssamese = 'Assamese';
+const String strSanskrit = 'Sanskrit';
+
+const String strSpanish = 'Spanish';
+const String strFrench = 'French';
+const String strGerman = 'German';
+const String strChinese = 'Chinese';
+const String strJapanese = 'Japanese';
+const String strKorean = 'Korean';
+const String strArabic = 'Arabic';
+const String strRussian = 'Russian';
+const String strPortuguese = 'Portuguese';
+const String strItalian = 'Italian';
+const String strTurkish = 'Turkish';
