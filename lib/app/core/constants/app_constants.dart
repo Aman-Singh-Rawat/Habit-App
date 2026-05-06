@@ -147,6 +147,10 @@ const String strAppLanguage = 'App Language';
 const String strLight = 'Light';
 const String strDark = 'Dark';
 
+const String strChooseTheme = 'Choose Theme';
+const String strSystemDefault = 'System Default';
+const String strOk = 'OK';
+
 /// App Languages
 const String strEnglishUs = 'English (US)';
 
@@ -176,3 +180,5 @@ const String strRussian = 'Russian';
 const String strPortuguese = 'Portuguese';
 const String strItalian = 'Italian';
 const String strTurkish = 'Turkish';
+
+

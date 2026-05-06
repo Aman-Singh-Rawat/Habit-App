@@ -40,6 +40,7 @@ Widget _settingsTile(
     children: [
       GestureDetector(
         onTap: onClick,
+        behavior: HitTestBehavior.opaque,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
           child: Row(

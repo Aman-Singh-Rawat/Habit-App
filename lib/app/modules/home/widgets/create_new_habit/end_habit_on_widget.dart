@@ -7,6 +7,7 @@ import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/extensions/secondary_button_text.dart';
 import 'package:habitly/app/core/extensions/string_extension.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
+import 'package:habitly/app/core/utils/helpers/helper_function.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/custom_calendar_widget.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/switch_plus_title.dart';
@@ -14,6 +15,8 @@ import 'package:habitly/app/modules/widgets/buttons/custom_elevated_button.dart'
 import 'package:habitly/app/modules/widgets/others/filter_widget.dart';
 import 'package:habitly/app/modules/widgets/text_field/date_time_field_widget.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../widgets/custom_drag_handle_widget.dart';
 
 class EndHabitOnWidget extends StatelessWidget {
   const EndHabitOnWidget({super.key});
@@ -145,31 +148,13 @@ void showCalendarBottomSheet({
       return SizedBox(
         height: height ?? MediaQuery.sizeOf(context).height * 0.6,
         child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-
-            /// Border only on top
-            border: Border(
-              top: BorderSide(color: AppColors.aboutUserDarkBorder),
-              left: BorderSide(color: AppColors.aboutUserDarkBorder),
-              right: BorderSide(color: AppColors.aboutUserDarkBorder),
-            ),
-          ),
+          decoration: AHelperFunction.getBottomSheetDecoration(context),
           child: SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 // Drag handle
-                Container(
-                  width: 40.w,
-                  height: 3.5.h,
-                  margin: EdgeInsets.only(bottom: AppSpacing.md),
-                  decoration: BoxDecoration(
-                    color: AppColors.darkSecondaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+                CustomDragHandleWidget(),
 
                 Expanded(child: child),
               ],
@@ -180,3 +165,5 @@ void showCalendarBottomSheet({
     },
   );
 }
+
+

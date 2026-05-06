@@ -3,6 +3,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 
+import '../../theme/app_colors.dart';
+
 class AHelperFunction {
   static bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
@@ -25,6 +27,20 @@ class AHelperFunction {
     return dates.any(
       (d) =>
           d.year == today.year && d.month == today.month && d.day == today.day,
+    );
+  }
+
+  static BoxDecoration getBottomSheetDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+
+      /// Border only on top
+      border: Border(
+        top: BorderSide(color: AppColors.aboutUserDarkBorder),
+        left: BorderSide(color: AppColors.aboutUserDarkBorder),
+        right: BorderSide(color: AppColors.aboutUserDarkBorder),
+      ),
     );
   }
 }
