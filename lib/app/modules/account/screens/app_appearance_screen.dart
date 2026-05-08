@@ -18,7 +18,7 @@ import 'package:habitly/app/modules/widgets/others/custom_drag_handle.dart';
 
 import '../../../core/extensions/secondary_button_text.dart';
 import '../../widgets/buttons/custom_elevated_button.dart';
-import '../widgets/appearance/app_appearance_tile.dart';
+import '../../widgets/others/settings_tile.dart';
 
 class AppAppearanceScreen extends StatelessWidget {
   const AppAppearanceScreen({super.key});
@@ -33,26 +33,26 @@ class AppAppearanceScreen extends StatelessWidget {
       top: false,
       child: Scaffold(
         appBar: CustomAppbar(title: AppbarTitle(title: strAppAppearance)),
-        body: _bodyWidget(context).paddingAll(width_20),
+        body: _bodyWidget(context),
       ),
     );
   }
 
-  Column _bodyWidget(BuildContext context) {
+  Widget _bodyWidget(BuildContext context) {
     final controller = ThemeController.instance;
     return Column(
       children: [
         Obx(
-          () => AppAppearanceTile(
+          () => SettingsTile(
             title: strTheme,
             trailingText: controller.getSelectedThemeText,
             onClick: () => showThemeBottomSheet(context),
           ),
         ),
 
-        SizedBox(height: height_20),
+        SizedBox(height: height_25),
 
-        AppAppearanceTile(
+        SettingsTile(
           title: strAppLanguage,
           trailingText: strEnglishUs,
           onClick: () {
@@ -60,6 +60,6 @@ class AppAppearanceScreen extends StatelessWidget {
           },
         ),
       ],
-    );
+    ).paddingAll(width_20);
   }
 }

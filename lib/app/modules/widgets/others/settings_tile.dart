@@ -2,19 +2,20 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:habitly/app/modules/widgets/texts/settings_title.dart';
 
-import '../../../../core/utils/helpers/helper_function.dart';
-import '../../../../core/values/app_values.dart';
+import '../../../core/utils/helpers/helper_function.dart';
+import '../../../core/values/app_values.dart';
 
-class AppAppearanceTile extends StatelessWidget {
+class SettingsTile extends StatelessWidget {
   final String title;
-  final String trailingText;
+  final String? trailingText;
   final VoidCallback onClick;
 
-  const AppAppearanceTile({
+  const SettingsTile({
     super.key,
     required this.title,
-    required this.trailingText,
+    this.trailingText,
     required this.onClick,
   });
 
@@ -26,14 +27,7 @@ class AppAppearanceTile extends StatelessWidget {
       crossAxisAlignment: .center,
       children: [
         /// title
-        Expanded(
-          child: Text(
-            title,
-            style: Theme.of(
-              context,
-            ).textTheme.labelLarge!.copyWith(fontSize: font_16),
-          ),
-        ),
+        Expanded(child: SettingsTitle(title: title)),
 
         GestureDetector(
           behavior: HitTestBehavior.opaque,
@@ -42,14 +36,16 @@ class AppAppearanceTile extends StatelessWidget {
             mainAxisSize: .min,
             crossAxisAlignment: .center,
             children: [
-              Text(
-                trailingText,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium!.copyWith(fontSize: font_13),
-              ),
+              if (trailingText != null) ...[
+                Text(
+                  trailingText!,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium!.copyWith(fontSize: font_13),
+                ),
 
-              SizedBox(width: width_16),
+                SizedBox(width: width_16),
+              ],
 
               Icon(
                 Icons.arrow_forward_ios_rounded,

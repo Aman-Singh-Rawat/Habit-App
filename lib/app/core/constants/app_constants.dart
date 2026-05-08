@@ -181,4 +181,11 @@ const String strPortuguese = 'Portuguese';
 const String strItalian = 'Italian';
 const String strTurkish = 'Turkish';
 
-
+/// preferences
+const String strStartAt = 'Start at';
+const String strVacationMode = 'Vacation Mode';
+const String strDailyRemainder = 'Daily Reminder';
+const String strFirstDayOfWeek = 'First Day Of Week';
+const String strReminderTime = 'Reminder Time';
+const String strClearCache = 'Clear Cache';
+const String strRestartAllHabits = 'Restart All Habits';

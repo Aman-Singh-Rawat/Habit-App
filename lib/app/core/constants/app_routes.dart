@@ -24,4 +24,5 @@ class AppRoutes {
   /// account
   static const appAppearance = "/app-appearance";
   static const appLanguage = "/app-language";
+  static const preference = "/preference";
 }

@@ -104,7 +104,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(height: 10.h),
 
           ///
-          settingsGroup(context, AppLists.settingsList.sublist(0, 3)),
+          SettingsGroup(items: AppLists.settingsList.sublist(0, 3)),
           SizedBox(height: 20.h),
 
           /// Privacy & Security
@@ -112,7 +112,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(height: 10.h),
 
           ///
-          settingsGroup(context, AppLists.settingsList.sublist(3)),
+          SettingsGroup(items: AppLists.settingsList.sublist(3)),
           SizedBox(height: 20.h),
 
           /// Sign out

@@ -4,6 +4,7 @@ import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/core/theme/app_text_theme.dart';
 import 'package:habitly/app/core/theme/checkbox_theme.dart';
 import 'package:habitly/app/core/theme/elevated_button_theme.dart';
+import 'package:habitly/app/core/theme/switch_theme.dart';
 import 'package:habitly/app/core/theme/text_field_theme.dart';
 
 class AppTheme {
@@ -20,6 +21,7 @@ class AppTheme {
       brightness: Brightness.light,
     ),
     checkboxTheme: ACheckboxTheme.theme,
+    switchTheme: CustomSwitchTheme.lightTheme,
 
     scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
 
@@ -40,6 +42,7 @@ class AppTheme {
     fontFamily: 'Poppins',
 
     checkboxTheme: ACheckboxTheme.theme,
+    switchTheme: CustomSwitchTheme.lightTheme,
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.primary,
       brightness: Brightness.dark,
