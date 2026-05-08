@@ -39,12 +39,15 @@ class AppAppearanceScreen extends StatelessWidget {
   }
 
   Column _bodyWidget(BuildContext context) {
+    final controller = ThemeController.instance;
     return Column(
       children: [
-        AppAppearanceTile(
-          title: strTheme,
-          trailingText: strLight,
-          onClick: () => showThemeBottomSheet(context),
+        Obx(
+          () => AppAppearanceTile(
+            title: strTheme,
+            trailingText: controller.getSelectedThemeText,
+            onClick: () => showThemeBottomSheet(context),
+          ),
         ),
 
         SizedBox(height: height_20),
@@ -59,8 +62,4 @@ class AppAppearanceScreen extends StatelessWidget {
       ],
     );
   }
-
-
-
-
 }

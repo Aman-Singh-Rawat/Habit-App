@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/theme/theme_service.dart';
 
 class ThemeController extends GetxController {
@@ -28,18 +29,7 @@ class ThemeController extends GetxController {
     changeSelectedThemeIndex(currentThemeMode.value);
   }
 
-  Future<void> selectTheme(int index) async {
-
-    Get.back();
-
-    await Future.delayed(
-      const Duration(milliseconds: 200),
-    );
-
-    changeTheme(index);
-  }
-
-  Future<void> changeTheme(int index) async {
+  void changeTheme(int index) {
     selectedThemeIndex.value = index;
 
     final ThemeMode mode = switch (index) {
@@ -51,8 +41,23 @@ class ThemeController extends GetxController {
     currentThemeMode.value = mode;
 
     Get.changeThemeMode(mode);
+  }
+
+  void onCancel() {
+    loadTheme();
+    Get.back();
+  }
+
+  Future<void> onSave() async {
+    final ThemeMode mode = switch (selectedThemeIndex.value) {
+      2 => ThemeMode.dark,
+      1 => ThemeMode.light,
+      _ => ThemeMode.system,
+    };
 
     await _service.saveThemeMode(mode);
+
+    Get.back(result: true);
   }
 
   void changeSelectedThemeIndex(ThemeMode mode) {
@@ -64,5 +69,13 @@ class ThemeController extends GetxController {
       case ThemeMode.dark:
         selectedThemeIndex.value = 2;
     }
+  }
+
+  String get getSelectedThemeText {
+    return switch (selectedThemeIndex.value) {
+      2 => strDark,
+      1 => strLight,
+      _ => strSystemDefault,
+    };
   }
 }

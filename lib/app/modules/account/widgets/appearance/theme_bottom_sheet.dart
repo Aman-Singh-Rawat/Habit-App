@@ -16,8 +16,11 @@ import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/others/custom_drag_handle.dart';
 
 Future<dynamic> showThemeBottomSheet(BuildContext context) {
+  final controller = ThemeController.instance;
+
   return Get.bottomSheet(
     backgroundColor: Colors.transparent,
+
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(28.r),
@@ -37,40 +40,45 @@ Future<dynamic> showThemeBottomSheet(BuildContext context) {
           Text(
             strChooseTheme,
             style: Theme.of(context).textTheme.headlineMedium,
-          ).paddingSymmetric(vertical: height_15),
+          ).paddingOnly(top: height_15, bottom: height_10),
 
           // divider
           Divider(),
 
-          SizedBox(height: height_20),
+          SizedBox(height: height_15),
 
           _appearanceThemeTextWidget(context),
 
           // divider
           Divider(),
 
-          SizedBox(height: height_25),
-
           Row(
             children: [
               Expanded(
                 child: CustomElevatedButton(
                   buttonText: strCancel,
-                  onClick: () {},
+                  onClick: controller.onCancel,
                   textColor: context.secondaryButtonTextColor,
                   backgroundColor: context.secondaryBackgroundColor,
                 ),
               ),
               const SizedBox(width: 17),
               Expanded(
-                child: CustomElevatedButton(buttonText: strOk, onClick: () {}),
+                child: CustomElevatedButton(
+                  buttonText: strOk,
+                  onClick: controller.onSave,
+                ),
               ),
             ],
-          ),
+          ).paddingSymmetric(vertical: height_20),
         ],
       ),
     ),
-  );
+  ).then((value) {
+    if (value == null) {
+      controller.loadTheme();
+    }
+  });
 }
 
 Obx _appearanceThemeTextWidget(BuildContext context) {
@@ -85,7 +93,7 @@ Obx _appearanceThemeTextWidget(BuildContext context) {
           .entries
           .map(
             (e) => _appAppearanceThemeTile(
-              onClick: () => controller.selectTheme(e.key),
+              onClick: () => controller.changeTheme(e.key),
               isSelected: e.key == selectedThemeIndex,
               title: e.value,
               context: context,
