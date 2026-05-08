@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/modules/home/models/one_time_task.dart';
 import 'package:habitly/app/modules/home/models/regular_habit.dart';
@@ -33,6 +34,8 @@ Future<void> initMain() async {
       statusBarBrightness: Brightness.dark,
     ),
   );
+
+  await GetStorage.init();
 
   await Hive.initFlutter();
 

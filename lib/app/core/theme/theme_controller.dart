@@ -4,6 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/theme/theme_service.dart';
 
+import '../dialogs/loading_dialog.dart';
+
 class ThemeController extends GetxController {
   /// instance
   static ThemeController get instance => Get.find<ThemeController>();
@@ -55,7 +57,11 @@ class ThemeController extends GetxController {
       _ => ThemeMode.system,
     };
 
+    currentThemeMode.value = mode;
+
     await _service.saveThemeMode(mode);
+
+    Get.changeThemeMode(mode);
 
     Get.back(result: true);
   }
