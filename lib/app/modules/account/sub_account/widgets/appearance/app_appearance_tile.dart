@@ -3,8 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/helpers/helper_function.dart';
-import '../../../../core/values/app_values.dart';
+import '../../../../../core/utils/helpers/helper_function.dart';
+import '../../../../../core/values/app_values.dart';
+
 
 class AppAppearanceTile extends StatelessWidget {
   final String title;

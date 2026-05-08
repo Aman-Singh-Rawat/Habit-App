@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:habitly/app/core/constants/app_routes.dart';
 
-import '../../../widgets/container/custom_card.dart';
+
+import '../../../../widgets/container/custom_card.dart';
 import 'account_icon_widget.dart';
 import 'account_section_label.dart';
 import 'account_section_trailing_icon.dart';

@@ -5,7 +5,6 @@ import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/constants/app_lists.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/core/values/app_values.dart';
-import 'package:habitly/app/modules/account/bindings/app_language_binding.dart';
 import 'package:habitly/app/modules/widgets/appbar/appbar_title.dart';
 import 'package:habitly/app/modules/widgets/appbar/custom_appbar.dart';
 import 'package:iconsax/iconsax.dart';

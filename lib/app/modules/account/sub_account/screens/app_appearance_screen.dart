@@ -9,16 +9,12 @@ import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/core/theme/theme_controller.dart';
 import 'package:habitly/app/core/utils/helpers/helper_function.dart';
 import 'package:habitly/app/core/values/app_values.dart';
-import 'package:habitly/app/modules/account/widgets/appearance/theme_bottom_sheet.dart';
-import 'package:habitly/app/modules/home/widgets/create_new_habit/end_habit_on_widget.dart';
-import 'package:habitly/app/modules/onboarding/views/widgets/onboarding_bottom_widget.dart';
 import 'package:habitly/app/modules/widgets/appbar/appbar_title.dart';
 import 'package:habitly/app/modules/widgets/appbar/custom_appbar.dart';
 import 'package:habitly/app/modules/widgets/others/custom_drag_handle.dart';
 
-import '../../../core/extensions/secondary_button_text.dart';
-import '../../widgets/buttons/custom_elevated_button.dart';
 import '../widgets/appearance/app_appearance_tile.dart';
+import '../widgets/appearance/theme_bottom_sheet.dart';
 
 class AppAppearanceScreen extends StatelessWidget {
   const AppAppearanceScreen({super.key});

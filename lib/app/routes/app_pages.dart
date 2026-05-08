@@ -1,9 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:habitly/app/core/constants/app_routes.dart';
-import 'package:habitly/app/modules/account/bindings/app_language_binding.dart';
-import 'package:habitly/app/modules/account/screens/app_appearance_screen.dart';
-import 'package:habitly/app/modules/account/screens/app_language_screen.dart';
+
 import 'package:habitly/app/modules/authentication/bindings/forgot_password_binding.dart';
 import 'package:habitly/app/modules/authentication/bindings/sign_in_binding.dart';
 import 'package:habitly/app/modules/authentication/bindings/signup_binding.dart';
@@ -38,6 +36,10 @@ import 'package:habitly/app/modules/user_setup/views/screens/influenced_you_scre
 import 'package:habitly/app/modules/user_setup/views/screens/procrastination_screen.dart';
 import 'package:habitly/app/modules/user_setup/views/screens/sleep_duration_screen.dart';
 import 'package:habitly/app/modules/user_setup/views/screens/wake_time_view.dart';
+
+import '../modules/account/sub_account/bindings/app_language_binding.dart';
+import '../modules/account/sub_account/screens/app_appearance_screen.dart';
+import '../modules/account/sub_account/screens/app_language_screen.dart';
 
 class AppPages {
   const AppPages._();

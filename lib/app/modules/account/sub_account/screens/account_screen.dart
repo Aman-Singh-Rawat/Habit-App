@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:habitly/app/core/constants/app_constants.dart';
 
-import '../../../core/constants/app_lists.dart';
-import '../../widgets/appbar/appbar_title.dart';
-import '../../widgets/appbar/leading_app_bar_image_widget.dart';
+import '../../../../core/constants/app_lists.dart';
+import '../../../widgets/appbar/appbar_title.dart';
+import '../../../widgets/appbar/leading_app_bar_image_widget.dart';
 import '../widgets/account/account_section_title.dart';
 import '../widgets/account/popup_item.dart';
 import '../widgets/account/settings_group.dart';

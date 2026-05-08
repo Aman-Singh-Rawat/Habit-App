@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/constants/app_constants.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../widgets/container/custom_card.dart';
+import '../../../../../core/constants/app_constants.dart';
+import '../../../../../core/theme/app_colors.dart';
+
+import '../../../../widgets/container/custom_card.dart';
 import 'account_icon_widget.dart';
 import 'account_section_label.dart';
 import 'account_section_trailing_icon.dart';
