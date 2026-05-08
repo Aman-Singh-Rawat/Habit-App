@@ -2,7 +2,9 @@ import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:habitly/app/core/constants/app_routes.dart';
 import 'package:habitly/app/modules/account/bindings/app_language_binding.dart';
+import 'package:habitly/app/modules/account/bindings/personal_binding.dart';
 import 'package:habitly/app/modules/account/bindings/preference_binding.dart';
+import 'package:habitly/app/modules/account/screens/personal_info.dart';
 import 'package:habitly/app/modules/account/screens/preference_screen.dart';
 import 'package:habitly/app/modules/account/screens/app_appearance_screen.dart';
 import 'package:habitly/app/modules/account/screens/app_language_screen.dart';
@@ -150,6 +152,12 @@ class AppPages {
       name: AppRoutes.preference,
       page: () => PreferenceScreen(),
       binding: PreferenceBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.personalInfo,
+      page: () => PersonalInfo(),
+      binding: PersonalBinding(),
     ),
   ];
 }

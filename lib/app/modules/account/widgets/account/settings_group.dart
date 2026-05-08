@@ -14,7 +14,6 @@ class SettingsGroup extends StatelessWidget {
 
   const SettingsGroup({super.key, required this.items});
 
-
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -38,17 +37,19 @@ class SettingsGroup extends StatelessWidget {
     switch (index) {
       case 0:
         Get.toNamed(AppRoutes.preference);
+      case 1:
+        Get.toNamed(AppRoutes.personalInfo);
       case 3:
         Get.toNamed(AppRoutes.appAppearance);
     }
   }
 
   Widget _settingsTile(
-      BuildContext context,
-      Map<String, dynamic> item, {
-        bool isLast = false,
-        required VoidCallback onClick,
-      }) {
+    BuildContext context,
+    Map<String, dynamic> item, {
+    bool isLast = false,
+    required VoidCallback onClick,
+  }) {
     return Column(
       children: [
         GestureDetector(
@@ -100,5 +101,4 @@ class SettingsGroup extends StatelessWidget {
       ],
     );
   }
-
 }

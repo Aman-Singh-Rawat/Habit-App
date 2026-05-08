@@ -46,6 +46,7 @@ class AppColors {
   static const Color infoColor = Color(0xFF3B82F6); // Soft blue
 
   static const Color redColor = Color(0xFFE53935);
+  static const Color grey = Color(0xffEAEAEA);
 
   static const Color textFieldBackground = Color(0xFFFAFAFA);
   static const Color dividerColor = Color(0xFFf1f1f0);

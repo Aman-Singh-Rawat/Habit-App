@@ -25,4 +25,5 @@ class AppRoutes {
   static const appAppearance = "/app-appearance";
   static const appLanguage = "/app-language";
   static const preference = "/preference";
+  static const personalInfo = "/personal-info";
 }

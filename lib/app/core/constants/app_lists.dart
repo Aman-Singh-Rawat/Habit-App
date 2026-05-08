@@ -174,4 +174,6 @@ class AppLists {
     strItalian,
     strTurkish,
   ];
+
+  static const List<String> genderOptions = [strMale, strFemale, strOther];
 }

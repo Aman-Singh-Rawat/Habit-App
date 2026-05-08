@@ -189,3 +189,13 @@ const String strFirstDayOfWeek = 'First Day Of Week';
 const String strReminderTime = 'Reminder Time';
 const String strClearCache = 'Clear Cache';
 const String strRestartAllHabits = 'Restart All Habits';
+
+/// personal info
+const String strFullName = 'Full Name';
+const String strEmail = 'Email';
+const String strGender = 'Gender';
+const String strPhoneNumber = 'Phone Number';
+const String strMale = 'Male';
+const String strFemale = 'Female';
+const String strOther = 'Other';
+const String strSelect = 'Select';
