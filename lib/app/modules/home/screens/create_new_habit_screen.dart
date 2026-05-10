@@ -6,13 +6,17 @@ import 'package:get/get_utils/src/extensions/widget_extensions.dart';
 import 'package:get/state_manager.dart';
 import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
+import 'package:habitly/app/core/values/app_values.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
+import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/create_new_habit_tab_child_widget.dart';
 import 'package:habitly/app/modules/home/widgets/custom_tab_widget.dart';
 import 'package:habitly/app/modules/home/widgets/tab_bar_widget.dart';
 import 'package:habitly/app/modules/widgets/buttons/custom_elevated_button.dart';
 
-class CreateNewHabitScreen extends StatelessWidget {
+import '../../../core/constants/app_constants.dart';
+
+class CreateNewHabitScreen extends GetView<RegularHabitController> {
   const CreateNewHabitScreen({super.key});
 
   @override
@@ -20,27 +24,20 @@ class CreateNewHabitScreen extends StatelessWidget {
     return _mainView();
   }
 
-  GetBuilder<CreateNewHabitController> _mainView() {
-    return GetBuilder<CreateNewHabitController>(
-      builder: (CreateNewHabitController controller) {
-        return SafeArea(
-          top: false,
-          child: Scaffold(body: _bodyWidget(controller)),
-        );
-      },
-    );
+  Widget _mainView() {
+    return SafeArea(top: false, child: Scaffold(body: _bodyWidget()));
   }
 
-  Column _bodyWidget(CreateNewHabitController controller) {
+  Column _bodyWidget() {
     return Column(
       children: [
         Expanded(
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [_sliverAppBar(controller, innerBoxIsScrolled)];
+              return [_sliverAppBar(innerBoxIsScrolled)];
             },
             body: TabBarView(
-              controller: controller.controller,
+              controller: controller.createNewHabitParentTabController,
               children: [
                 CreateNewHabitTabChildWidget(
                   key: PageStorageKey('regular'),
@@ -69,10 +66,7 @@ class CreateNewHabitScreen extends StatelessWidget {
     );
   }
 
-  SliverAppBar _sliverAppBar(
-    CreateNewHabitController controller,
-    bool innerBoxIsScrolled,
-  ) {
+  SliverAppBar _sliverAppBar(bool innerBoxIsScrolled) {
     return SliverAppBar(
       leadingWidth: 48.w,
       centerTitle: true,
@@ -81,7 +75,7 @@ class CreateNewHabitScreen extends StatelessWidget {
         onTap: () => Get.back(),
         child: Icon(CupertinoIcons.clear),
       ),
-      title: Text(AppStrings.createNewHabit),
+      title: Text(strCreateNewHabit),
       pinned: true,
       snap: true,
       floating: true,
@@ -90,21 +84,22 @@ class CreateNewHabitScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(54.h),
         child: Obx(() {
           // checking is first tab selected
-          bool isRegularHabitSelected = controller.selectedTabIndex.value == 0;
+          bool isRegularHabitSelected =
+              controller.createNewHabitParentTabIndex.value == 0;
 
           return TabBarWidget(
-            controller: controller.controller,
+            controller: controller.createNewHabitParentTabController,
             tabs: [
               CustomTabWidget(
                 isSelected: isRegularHabitSelected,
-                tabText: AppStrings.regularHabit,
+                tabText: strRegularHabit,
               ),
               CustomTabWidget(
                 isSelected: !isRegularHabitSelected,
-                tabText: AppStrings.oneTimeTask,
+                tabText: strOneTimeTask,
               ),
             ],
-          ).paddingOnly(bottom: 10.h);
+          ).paddingOnly(bottom: height_10);
         }),
       ),
     );

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
+import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/custom_tab_widget.dart';
 import 'package:habitly/app/modules/home/widgets/tab_bar_widget.dart';
 
@@ -10,8 +12,7 @@ class ChooseIconTabBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CreateNewHabitController controller =
-        CreateNewHabitController.instance;
+    final RegularHabitController controller = RegularHabitController.instance;
 
     return Obx(
       () => TabBarWidget(
@@ -19,11 +20,11 @@ class ChooseIconTabBarWidget extends StatelessWidget {
         tabs: [
           CustomTabWidget(
             isSelected: controller.selectedIconTabIndex.value == 0,
-            tabText: AppStrings.icon,
+            tabText: strIcon,
           ),
           CustomTabWidget(
             isSelected: controller.selectedIconTabIndex.value == 1,
-            tabText: AppStrings.emoji,
+            tabText: strEmoji,
           ),
         ],
       ),

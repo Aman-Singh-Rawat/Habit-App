@@ -5,6 +5,8 @@ import 'package:habitly/app/core/constants/text_styles.dart';
 import 'package:habitly/app/modules/widgets/texts/section_title.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../core/theme/app_colors.dart';
+
 class PrimaryTextFieldAndLabel extends StatelessWidget {
   final String title;
   final IconData? icon;
@@ -12,6 +14,7 @@ class PrimaryTextFieldAndLabel extends StatelessWidget {
   final TextEditingController controller;
   final VoidCallback? onObscureClick;
   final String? Function(String?)? validator;
+  final bool isRequired;
 
   const PrimaryTextFieldAndLabel({
     super.key,
@@ -21,6 +24,7 @@ class PrimaryTextFieldAndLabel extends StatelessWidget {
     required this.controller,
     this.obscureText = false,
     this.validator,
+    this.isRequired = false,
   });
 
   @override
@@ -28,9 +32,17 @@ class PrimaryTextFieldAndLabel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionTitle(text: title),
+        Row(
+          mainAxisSize: .min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SectionTitle(text: title),
+            if (isRequired)
+              const SectionTitle(text: ' *', color: Colors.redAccent),
+          ],
+        ),
 
-        SizedBox(height: AppSpacing.sm),
+        const SizedBox(height: AppSpacing.sm),
         // Text Field
         TextFormField(
           validator: validator,

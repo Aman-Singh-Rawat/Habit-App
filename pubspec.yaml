@@ -40,6 +40,7 @@ dependencies:
   cached_network_image: ^3.4.1
   dropdown_button2: ^3.1.0
   iconsax: ^0.0.8
+  another_flushbar: ^1.12.32
 
 dev_dependencies:
   hive_generator: ^2.0.1

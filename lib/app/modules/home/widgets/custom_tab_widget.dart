@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
+import 'package:habitly/app/core/values/app_values.dart';
 
 class CustomTabWidget extends StatelessWidget {
   final bool isSelected;
@@ -24,9 +25,9 @@ class CustomTabWidget extends StatelessWidget {
       ),
       child: Text(
         tabText,
-        style:Theme.of(context).textTheme.headlineSmall!.copyWith(
-          fontSize: 13.sp
-        ),
+        style: Theme.of(
+          context,
+        ).textTheme.headlineSmall!.copyWith(fontSize: font_13),
       ),
     );
   }

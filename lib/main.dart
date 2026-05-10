@@ -10,7 +10,8 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:toastification/toastification.dart';
 
 const String appFontFamily = 'Poppins';
-const String latoFontFamily = 'lato';
+const String dmMonoFontFamily = 'DMMono';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -29,12 +29,9 @@ class habitlyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
-            // ─── Translation setup (3 lines is all you need) ──────────
             translations: AppTranslations(),
             locale: const Locale('en', 'US'),
             fallbackLocale: const Locale('en', 'US'),
-
-            // ──────────────────────────────────────────────────────────
             initialBinding: AppBindings(),
             title: AppStrings.habitly,
             debugShowCheckedModeBanner: false,

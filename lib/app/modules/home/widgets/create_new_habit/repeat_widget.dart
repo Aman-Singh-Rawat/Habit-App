@@ -24,8 +24,7 @@ class RepeatWidget extends StatelessWidget {
                 controller.selectedRepeatIndex.value == repeatItem.key;
             return Expanded(
               child: GestureDetector(
-                onTap: () =>
-                    controller.selectedRepeatIndex.value = repeatItem.key,
+                onTap: () => controller.handleRepeatWidgetClick(repeatItem.key),
                 child: FilterWidget(
                   itemName: repeatItem.value.name,
                   isSelected: isSelected,

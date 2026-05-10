@@ -6,16 +6,18 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_utils/src/extensions/widget_extensions.dart';
 import 'package:habitly/app/core/constants/emoji_icon_data.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
+import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/choose_icon_child_widget.dart';
 import 'package:habitly/app/modules/home/widgets/choose_icon_list.dart';
+
+import '../../../core/values/app_values.dart';
 
 class ChooseIconTabBarViewWidget extends StatelessWidget {
   const ChooseIconTabBarViewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final CreateNewHabitController controller =
-        CreateNewHabitController.instance;
+    final RegularHabitController controller = RegularHabitController.instance;
 
     return SizedBox(
       height: Get.height * 0.5,
@@ -51,6 +53,6 @@ class ChooseIconTabBarViewWidget extends StatelessWidget {
           ),
         ],
       ),
-    ).paddingOnly(left: 16.w, right: 16.w, top: 20.h);
+    ).paddingOnly(left: width_16, right: width_16, top: height_20);
   }
 }

@@ -140,6 +140,7 @@ const String strCopy = 'copy';
 
 /// Actions
 const String strSignOut = 'Sign out';
+const String strHowManyDaysAWeak = 'How Many Days a Weak';
 
 /// App Appearance
 const String strTheme = 'Theme';
@@ -199,3 +200,18 @@ const String strMale = 'Male';
 const String strFemale = 'Female';
 const String strOther = 'Other';
 const String strSelect = 'Select';
+
+/// create new habit
+const String strCreateNewHabit = 'Create New Habit';
+const String strRegularHabit = 'Regular Habit';
+const String strOneTimeTask = 'One Time Task';
+const String strHabitName = 'Habit Name';
+const String strTaskName = 'Task Name';
+const String strIcon = 'Icon';
+const String strViewAll = 'View All';
+const String strChooseIcon = 'Choose Icon';
+const String strSearchIcon = 'Search Icon';
+const String strEmoji = 'Emoji';
+const String strPleaseSelectAnIconOrEmoji = "Please select an icon or emoji";
+const String strColor = 'Color';
+const String strFindYourColor = 'Find Your Color';

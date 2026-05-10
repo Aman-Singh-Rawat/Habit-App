@@ -42,8 +42,8 @@ class OnTheseDayWidget extends StatelessWidget {
 
                 Obx(
                   () => Checkbox(
-                    value: controller.allDay.value,
-                    onChanged: controller.toggleAllDay,
+                    value: controller.selectedRepeatIndex.value == 0,
+                    onChanged: (value) => controller.handleRepeatWidgetClick(1),
                   ),
                 ),
               ],
@@ -68,8 +68,10 @@ class OnTheseDayWidget extends StatelessWidget {
                       height: 50,
                       fontSize: 25,
                       onItemClick: () =>
-                          controller.onSelectedDayChoose(letter.key+1),
-                      isSelected: controller.isSelectedDayContains(letter.key+1),
+                          controller.onSelectedDayChoose(letter.key + 1),
+                      isSelected: controller.isSelectedDayContains(
+                        letter.key + 1,
+                      ),
                       item: AppLists.weekDayPrefixLetter[letter.key],
                     ).paddingOnly(right: 10.w),
                   )

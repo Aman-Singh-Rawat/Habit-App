@@ -7,6 +7,8 @@ import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
 
+import '../../../../core/constants/app_constants.dart';
+
 class PerWeakwidget extends StatelessWidget {
   const PerWeakwidget({super.key});
 
@@ -21,7 +23,7 @@ class PerWeakwidget extends StatelessWidget {
         Obx(
           () => Text(
             controller.selectedPerWeak.value == -1
-                ? 'How Many Days a Weak'
+                ? strHowManyDaysAWeak
                 : '${controller.selectedPerWeak.value} ${AppStrings.daysPerWeek}',
             style: TextStyle(fontWeight: FontWeight.w500),
           ).paddingSymmetric(horizontal: AppSpacing.bf),
@@ -32,13 +34,14 @@ class PerWeakwidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [1, 2, 3, 4, 5, 6, 7].map((item) {
               return GestureDetector(
-                onTap: () => controller.onPerWeakClick(item),
+                //onTap: () => controller.onPerWeakClick(item),
+                onTap: () => controller.onSelectRepeatDays(value: item),
                 child: Obx(
                   () => Container(
                     margin: EdgeInsets.only(right: item == 7 ? 0 : 8.w),
                     padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
-                      color: controller.selectedPerWeak.value == item
+                      color: controller.activitySelectedDays.contains(item)
                           ? AppColors.primary
                           : Colors.transparent,
                       shape: BoxShape.circle,

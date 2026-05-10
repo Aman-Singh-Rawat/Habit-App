@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/src/extensions/widget_extensions.dart';
+import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/constants/text_styles.dart';
 import 'package:habitly/app/core/extensions/secondary_button_text.dart';
@@ -14,9 +15,15 @@ import 'package:habitly/app/modules/widgets/buttons/custom_elevated_button.dart'
 import 'package:habitly/app/modules/widgets/others/custom_drag_handle.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../core/values/app_values.dart';
+import '../../widgets/buttons/action_button_row.dart';
+import '../../widgets/text_field/search_widget.dart';
+import '../../widgets/texts/bottom_sheet_title.dart';
+import '../controllers/regular_habit_controller.dart';
+
+/// currently using this on create new habit screen [as a icon & emoji picker]
 Future<dynamic> showChooseIconBottomSheet(BuildContext context) {
-  // CreateNewHabitController
-  final controller = CreateNewHabitController.instance;
+  final regularController = RegularHabitController.instance;
 
   // showing bottom sheet for icon and emoji
   return showModalBottomSheet(
@@ -29,64 +36,37 @@ Future<dynamic> showChooseIconBottomSheet(BuildContext context) {
         height: Get.height * 0.9,
         child: Column(
           children: [
-            CustomDragHandle(),
+            const CustomDragHandle(),
 
-            Text(
-              AppStrings.chooseIcon,
-              style: Theme.of(
-                context,
-              ).textTheme.headlineSmall!.copyWith(fontSize: 18.sp),
-            ).paddingSymmetric(vertical: 15.h),
+            const DialogTitle(title: strChooseIcon),
 
-            Divider(),
+            const Divider(),
 
-            TextFormField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Iconsax.search_normal,
-                  color: context.textFieldHintColor,
-                ),
-                hint: Text(
-                  AppStrings.searchIcon,
-                  style: TextStyle(color: context.textFieldHintColor),
-                ),
-              ),
-              style: AppTextStyles.textFieldTextStyle.copyWith(
-                color: context.textFieldTextColor,
-              ),
-            ).paddingAll(15.w),
+            const SearchWidget().paddingAll(width_15),
 
-            SizedBox(height: 10.h),
+            SizedBox(height: height_10),
 
-            Column(
+            /// [CHOOSE ICON & EMOJI TAB & THEIR CONTENT]
+            const Column(
               children: [
                 ChooseIconTabBarWidget(),
 
                 ChooseIconTabBarViewWidget(),
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomElevatedButton(
-                    buttonText: AppStrings.cancel,
-                    onClick: controller.onCancel,
-                    textColor: context.secondaryButtonTextColor,
-                    backgroundColor: context.secondaryBackgroundColor,
-                  ),
-                ),
-                const SizedBox(width: 17),
-                Expanded(
-                  child: CustomElevatedButton(
-                    buttonText: AppStrings.ok,
-                    onClick: controller.onOk,
-                  ),
-                ),
-              ],
-            ).paddingOnly(top: 20.h, left: 20.w, right: 20.w),
+
+            /// bottom sheet cancel & ok [BUTTONS];
+            ActionButtonsRow(
+              primaryText: AppStrings.ok,
+              primaryOnTap: () =>
+                  regularController.onChooseIconOkClick(context),
+
+              secondaryText: AppStrings.cancel,
+              secondaryOnTap: regularController.onChooseIconCancelClick,
+            ).paddingOnly(top: height_20, left: width_20, right: width_20),
           ],
         ),
       );
     },
-  );
+  ).then(regularController.onChooseIconBottomSheetClose);
 }

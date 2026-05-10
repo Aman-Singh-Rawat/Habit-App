@@ -111,6 +111,8 @@ class CreateNewHabitController extends GetxController
 
   final RxBool isColorPickerSelected = false.obs;
 
+  RxList<int> activitySelectedDays = <int>[].obs;
+
   /// Functions
   @override
   void onInit() {
@@ -260,6 +262,27 @@ class CreateNewHabitController extends GetxController
       selectedDayIndexList.assignAll([1, 2, 3, 4, 5, 6, 7]);
     } else {
       selectedDayIndexList.clear();
+    }
+  }
+
+  /// day selection all logics are working from here
+  void onSelectRepeatDays({int? value}) {
+    if (selectedRepeatIndex.value == 0) {
+      activitySelectedDays.clear();
+      activitySelectedDays.addAll([1, 2, 3, 4, 5, 6, 7]);
+      return;
+    }
+
+    if (value != null) {
+      activitySelectedDays.add(value);
+    }
+  }
+
+  void handleRepeatWidgetClick(int index) {
+    selectedRepeatIndex.value = index;
+
+    if (index == 0) {
+      onSelectRepeatDays();
     }
   }
 

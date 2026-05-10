@@ -4,6 +4,8 @@ import 'package:habitly/app/modules/home/widgets/show_choose_icon_bottom_sheet.d
 import 'package:habitly/app/modules/widgets/buttons/view_all_text_widget.dart';
 import 'package:habitly/app/modules/widgets/texts/section_title.dart';
 
+import '../../../core/constants/app_constants.dart';
+
 class ScreenSectionTitleAndActionWidget extends StatelessWidget {
   const ScreenSectionTitleAndActionWidget({super.key});
 
@@ -13,13 +15,11 @@ class ScreenSectionTitleAndActionWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SectionTitle(text: AppStrings.icon),
+        const SectionTitle(text: strIcon),
 
         ViewAllTextWidget(
           onPressed: () {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              showChooseIconBottomSheet(context);
-            });
+            showChooseIconBottomSheet(context);
           },
         ),
       ],

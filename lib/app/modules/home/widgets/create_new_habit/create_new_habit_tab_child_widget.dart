@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_utils/src/extensions/widget_extensions.dart';
+import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/theme/validation.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
+import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/color_section.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/do_it_at.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/end_habit_on_widget.dart';
@@ -49,6 +51,9 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = CreateNewHabitController.instance;
+    final regularController = RegularHabitController.instance;
+    final habitTextControllerName = isRegularHabit ? strHabitName : strTaskName;
+
     return SingleChildScrollView(
       child: Form(
         key: isRegularHabit
@@ -57,66 +62,59 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// habit text title field
             PrimaryTextFieldAndLabel(
+              isRequired: true,
               validator: (value) =>
-                  AValidator.validateEmptyText(
-                    isRegularHabit ? 'Habit Name' : 'Task Name',
-                    value,
-                  ),
-              title: isRegularHabit
-                  ? AppStrings.habitName
-                  : AppStrings.taskName,
-              controller: isRegularHabit
-                  ? controller.habitController
-                  : controller.taskController,
+                  AValidator.validateEmptyText(habitTextControllerName, value),
+              title: habitTextControllerName,
+              controller: regularController.habitController,
             ).paddingSymmetric(horizontal: 20.w),
 
-            SizedBox(height: AppSpacing.xxl),
+            AppGaps.section,
 
-            // icon text =====> View All
-            ScreenSectionTitleAndActionWidget().paddingSymmetric(
+            /// Icon section title + "View All" button
+            const ScreenSectionTitleAndActionWidget().paddingSymmetric(
               horizontal: 20.w,
             ),
 
-            SizedBox(height: AppSpacing.lg),
+            AppGaps.field,
 
-            /// icon listview
-            iconHorizontalListWidget(),
+            /// Icons horizontal list
+            const IconRowWidget().paddingOnly(left: 20.w),
 
             /// Color Section
-            ColorSection(),
+            const ColorSection(),
 
             /// when or regular [WIDGET]
             getWhenOrRegularWidget,
 
             // do it at
-            DoItAtWidget(),
+            const DoItAtWidget(),
 
             // end habit on
             if (isRegularHabit)
-              EndHabitOnWidget().paddingOnly(
+              const EndHabitOnWidget().paddingOnly(
                 left: AppSpacing.bf,
                 right: AppSpacing.bf,
                 top: AppSpacing.xxl,
               ),
 
             // set reminder
-            Obx(
-                  () {
-                return SetReminderWidget(
-                  shouldValidate: isSwitchSelected,
-                  isSwitchSelected: isRegularHabit
-                      ? controller.setRegularReminder.value
-                      : controller.setOneTimeRegularReminder.value,
-                  textEditingController: isRegularHabit
-                      ? controller.setReminderHabitTimeController
-                      : controller.setReminderTaskTimeController,
-                  onReminderChanged: isRegularHabit
-                      ? controller.onSetReminder
-                      : controller.onOneTimeSetReminder,
-                );
-              },
-            ),
+            Obx(() {
+              return SetReminderWidget(
+                shouldValidate: isSwitchSelected,
+                isSwitchSelected: isRegularHabit
+                    ? controller.setRegularReminder.value
+                    : controller.setOneTimeRegularReminder.value,
+                textEditingController: isRegularHabit
+                    ? controller.setReminderHabitTimeController
+                    : controller.setReminderTaskTimeController,
+                onReminderChanged: isRegularHabit
+                    ? controller.onSetReminder
+                    : controller.onOneTimeSetReminder,
+              );
+            }),
           ],
         ).paddingOnly(top: 25.h),
       ),
