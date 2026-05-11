@@ -34,6 +34,14 @@ class AppGaps {
   // Horizontal btn space
   static final betweenRowBtnGap = SizedBox(width: width_16);
 
+  /// ======================= X WIDTHS X =======================
+  static final width8 = SizedBox(width: width_8);
+  static final width10 = SizedBox(width: width_10);
+
+  /// ======================= X HEIGHTS X =======================
+  static final height12 = SizedBox(height: height_12);
   static final height20 = SizedBox(height: height_20);
   static final height30 = SizedBox(height: height_30);
+
+  /// ======================= X HEIGHTS X =======================
 }

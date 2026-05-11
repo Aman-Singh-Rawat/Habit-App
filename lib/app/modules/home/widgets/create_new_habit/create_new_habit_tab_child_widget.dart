@@ -25,14 +25,15 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
 
   const CreateNewHabitTabChildWidget({super.key, required this.isRegularHabit});
 
+  /// Repeat type [daily, monthly, weekly]
   Widget get getWhenOrRegularWidget {
     if (isRegularHabit) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Repeat Widget
-          RepeatWidget(),
+          // Repeat type Widget
+          const RepeatTypeWidget(),
 
           // Repeat Content Widget
           RepeatContentSection(),

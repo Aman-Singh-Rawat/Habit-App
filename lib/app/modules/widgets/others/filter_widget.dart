@@ -4,6 +4,8 @@ import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/text_styles.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
 
+import '../../../core/values/app_values.dart';
+
 class FilterWidget extends StatelessWidget {
   const FilterWidget({
     super.key,
@@ -22,14 +24,16 @@ class FilterWidget extends StatelessWidget {
       duration: Duration(milliseconds: 200),
       decoration: BoxDecoration(
         color: isSelected ? AppColors.primary : Colors.transparent,
-        borderRadius: BorderRadius.all(Radius.circular(AppSpacing.xl.r)),
+        borderRadius: BorderRadius.all(Radius.circular(radius_30)),
         border: Border.all(
           color: !isSelected
               ? AppColors.aboutUserDarkBorder
               : Colors.transparent,
         ),
       ),
-      padding: padding ?? EdgeInsets.symmetric(horizontal: 19.w, vertical: 10.h),
+      padding:
+          padding ??
+          EdgeInsets.symmetric(horizontal: width_19, vertical: height_10),
 
       child: Center(
         child: Text(

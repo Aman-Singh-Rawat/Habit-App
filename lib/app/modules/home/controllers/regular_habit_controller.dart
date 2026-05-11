@@ -38,10 +38,24 @@ class RegularHabitController extends GetxController
   final RxInt emojiSelectedIndex = (-1).obs;
 
   /// color section [SELECTED_COLOR] ==> initially we assuming the first color is selected
-  Rx<Color> selectedColor = AppLists.habitlyColors[0].obs;
-  Rx<int> selectedColorIndex = (0).obs;
+  final Rx<Color> selectedColor = AppLists.habitlyColors[0].obs;
+  final Rx<int> selectedColorIndex = (0).obs;
   final RxBool isColorPickerSelected = false.obs;
   final Rx<Color> lastSelectedColor = AppLists.habitlyColors[0].obs;
+
+  /// =================================== X REPEAT TYPE SECTION X ===================================
+
+  /// Repeat Type[daily, weekly, monthly];
+  final RxInt selectedRepeatTypeIndex = 0.obs;
+
+  /// on these day [daily]
+  final RxBool isOnTheseDayCheckboxSelected = true.obs;
+
+  /// on these day [weekly]
+  final RxInt repeatSelectedPerWeekValue = (-1).obs;
+
+  /// =================================== X REPEAT TYPE SECTION [CLOSE] X ===================================
+  final RxList<int> repeatSelectedDaysList = <int>[1, 2, 3, 4, 5, 6, 7].obs;
 
   /// ================================================ X GET-X METHODS X ================================================
 
@@ -159,11 +173,59 @@ class RegularHabitController extends GetxController
     );
   }
 
-/// ================== X [CLOSE] X ==================
-
-/// ================== X [CREATE_NEW_HABIT_FUNCTION] X ==================
-  void onSave() {
-
+  /// Repeat Type [daily, weekly, monthly]
+  void handleRepeatTypeWidgetClick(int index) {
+    selectedRepeatTypeIndex.value = index;
   }
 
+  /// on these day [ALL_DAY]
+  void handleOnAllDayCheckboxClick(bool? value) {
+    isOnTheseDayCheckboxSelected.value = value ?? false;
+
+    if (isOnTheseDayCheckboxSelected.value) {
+      repeatSelectedDaysList.value = List.generate(7, (index) => index + 1);
+    } else {
+      repeatSelectedDaysList.value = [];
+
+      selectedRepeatTypeIndex.value = 1;
+    }
+  }
+
+  /// Stores selected week days using 1-based indexing:
+  /// 1 = Monday, 2 = Tuesday, 3 = Wednesday,
+  /// 4 = Thursday, 5 = Friday, 6 = Saturday, 7 = Sunday
+  void onRepeatSelectedDayChoose(int index) {
+    final day = index + 1;
+
+    if (repeatSelectedDaysList.contains(day)) {
+      repeatSelectedDaysList.remove(day);
+    } else {
+      repeatSelectedDaysList.add(day);
+    }
+
+    isOnTheseDayCheckboxSelected.value = repeatSelectedDaysList.length == 7;
+  }
+
+  /// Repeat Type [weekly]
+  void onRepeatWeeklyDaysClick(int value) {
+    if (repeatSelectedPerWeekValue.value == value) {
+      repeatSelectedPerWeekValue.value = -1;
+
+      return;
+    }
+
+    repeatSelectedPerWeekValue.value = value;
+
+    /// this is for daily days if 7 days a week chosen
+    if (repeatSelectedPerWeekValue.value == 7) {
+      selectedRepeatTypeIndex.value = 0;
+      isOnTheseDayCheckboxSelected.value = true;
+      repeatSelectedDaysList.value = List.generate(7, (index) => index + 1);
+    }
+  }
+
+  /// ================== X [CLOSE] X ==================
+
+  /// ================== X [CREATE_NEW_HABIT_FUNCTION] X ==================
+  void onSave() {}
 }

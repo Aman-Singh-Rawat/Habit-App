@@ -5,6 +5,7 @@ import 'package:get/state_manager.dart';
 import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/utils/app_enums.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
+import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/custom_calendar_widget.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/on_these_day_widget.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/per_weak_widget.dart';
@@ -14,17 +15,22 @@ class RepeatContentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = CreateNewHabitController.instance;
     return Obx(() {
-      switch (RepeatEnum.values[controller.selectedRepeatIndex.value]) {
+      final selectedRepeatEnum =
+          RepeatEnum.values[RegularHabitController
+              .instance
+              .selectedRepeatTypeIndex
+              .value];
+
+      switch (selectedRepeatEnum) {
         case RepeatEnum.Daily:
           return const OnTheseDayWidget();
 
         case RepeatEnum.Weekly:
-          return PerWeakwidget().paddingOnly(top: AppSpacing.xl);
+          return const PerWeakWidget();
 
         case RepeatEnum.Monthly:
-          return CustomCalendarWidget().paddingOnly(top: AppSpacing.xl);
+          return const CustomCalendarWidget().paddingOnly(top: AppSpacing.xl);
       }
     });
   }

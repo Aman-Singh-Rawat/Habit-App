@@ -10,6 +10,8 @@ import 'package:habitly/app/core/theme/days_of_week_style.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../../core/constants/app_constants.dart';
+
 class CustomCalendarWidget extends StatelessWidget {
   const CustomCalendarWidget({super.key});
 
@@ -29,7 +31,7 @@ class CustomCalendarWidget extends StatelessWidget {
         children: [
           Obx(
             () => Text(
-              '${AppStrings.everyMonthOn} ${controller.multiSelectedDays.map((e) => e.day).join(', ')}',
+              '$strEveryMonthOn ${controller.multiSelectedDays.map((e) => e.day).join(', ')}',
             ),
           ),
 

@@ -5,56 +5,69 @@ import 'package:get/state_manager.dart';
 import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/theme/app_colors.dart';
+import 'package:habitly/app/core/values/app_values.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
+import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
+import 'package:habitly/app/modules/widgets/texts/section_title.dart';
 
 import '../../../../core/constants/app_constants.dart';
+import 'number_of_days_selection_item.dart';
 
-class PerWeakwidget extends StatelessWidget {
-  const PerWeakwidget({super.key});
+class PerWeakWidget extends StatelessWidget {
+  const PerWeakWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = CreateNewHabitController.instance;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Obx(
-          () => Text(
-            controller.selectedPerWeak.value == -1
-                ? strHowManyDaysAWeak
-                : '${controller.selectedPerWeak.value} ${AppStrings.daysPerWeek}',
-            style: TextStyle(fontWeight: FontWeight.w500),
-          ).paddingSymmetric(horizontal: AppSpacing.bf),
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [1, 2, 3, 4, 5, 6, 7].map((item) {
-              return GestureDetector(
-                //onTap: () => controller.onPerWeakClick(item),
-                onTap: () => controller.onSelectRepeatDays(value: item),
-                child: Obx(
-                  () => Container(
-                    margin: EdgeInsets.only(right: item == 7 ? 0 : 8.w),
-                    padding: EdgeInsets.all(16.w),
-                    decoration: BoxDecoration(
-                      color: controller.activitySelectedDays.contains(item)
-                          ? AppColors.primary
-                          : Colors.transparent,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.aboutUserDarkBorder),
-                    ),
-                    child: Center(child: Text(item.toString())),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ).paddingOnly(left: 18.w, top: AppSpacing.sm),
+        /// title
+        _weeklyTitle(context),
+
+        /// contains circular [counts] 1, 2, 3, 4, 5, 6, 7]
+        _weeklyChildWidget(),
       ],
+    ).paddingOnly(top: height_24);
+  }
+
+  Widget _weeklyTitle(BuildContext context) {
+    final controller = RegularHabitController.instance;
+    return Obx(
+      () => Text(
+        controller.repeatSelectedPerWeekValue.value == -1
+            ? strHowManyDaysAWeak
+            : '${controller.repeatSelectedPerWeekValue.value} $daysPerWeek',
+        style: Theme.of(context).textTheme.labelLarge,
+      ).paddingSymmetric(horizontal: width_20),
     );
   }
+}
+
+Widget _weeklyChildWidget() {
+  final controller = RegularHabitController.instance;
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Obx(
+      () => Row(
+        children: List.generate(7, (index) {
+          final item = index + 1;
+
+          final isSelected =
+              controller.repeatSelectedPerWeekValue.value == item;
+
+          return Padding(
+            padding: EdgeInsets.only(
+              right: width_8,
+              left: index == 0 ? width_20 : 0,
+            ),
+            child: NumberOfDaysSelectionItem(
+              item: item,
+              isSelected: isSelected,
+            ),
+          );
+        }),
+      ),
+    ),
+  );
 }
