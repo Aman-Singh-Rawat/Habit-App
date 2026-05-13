@@ -7,17 +7,20 @@ import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/utils/app_enums.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
+import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/segmented_option_selector.dart';
 import 'package:habitly/app/modules/widgets/others/filter_widget.dart';
+
+import '../../../../core/constants/app_constants.dart';
 
 class DoItAtWidget extends StatelessWidget {
   const DoItAtWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = CreateNewHabitController.instance;
+    final controller = RegularHabitController.instance;
     return SegmentedOptionSelector(
-      text: AppStrings.doItAt,
+      text: strDoItAt,
       widget: Obx(
         () => Row(
           children: DoItAtEnum.values.asMap().entries.map((item) {

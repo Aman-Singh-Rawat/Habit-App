@@ -220,3 +220,4 @@ const String strOnTheseDay = 'On These Day';
 const String strAllDay = 'All Day';
 const String daysPerWeek = 'Days Per Week';
 const String strEveryMonthOn = 'Every Month On';
+const String strDoItAt = 'Do It At';

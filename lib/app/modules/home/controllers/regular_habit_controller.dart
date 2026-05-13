@@ -224,6 +224,10 @@ class RegularHabitController extends GetxController
     }
   }
 
+
+  /// DO IT AT
+  Rx<int> selectedDoItAtIndex = 0.obs;
+
   /// ================== X [CLOSE] X ==================
 
   /// ================== X [CREATE_NEW_HABIT_FUNCTION] X ==================

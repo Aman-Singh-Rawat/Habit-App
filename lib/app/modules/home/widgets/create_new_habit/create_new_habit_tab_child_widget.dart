@@ -90,10 +90,10 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
             /// when or regular [WIDGET]
             getWhenOrRegularWidget,
 
-            // do it at
+            /// Do it at
             const DoItAtWidget(),
 
-            // end habit on
+            /// END HABIT ON
             if (isRegularHabit)
               const EndHabitOnWidget().paddingOnly(
                 left: AppSpacing.bf,
