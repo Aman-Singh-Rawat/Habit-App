@@ -101,7 +101,7 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
                 top: AppSpacing.xxl,
               ),
 
-            // set reminder
+            /// set reminder
             Obx(() {
               return SetReminderWidget(
                 shouldValidate: isSwitchSelected,
