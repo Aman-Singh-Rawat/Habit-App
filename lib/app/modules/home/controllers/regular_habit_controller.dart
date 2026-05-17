@@ -79,6 +79,16 @@ class RegularHabitController extends GetxController
   final Rx<DateTime> endHabitFocusedDay = DateTime.now().obs;
   Rx<DateTime?> endHabitSelectedDate = Rx<DateTime?>(null);
 
+  /// Reminder section Works start here
+  RxBool isSetRegularReminder = false.obs;
+  RxBool isSetOneTimeRegularReminder = false.obs;
+
+  final TextEditingController setReminderHabitTimeController =
+      TextEditingController();
+  final setReminderTaskTimeController = TextEditingController(
+    text: strPleaseSelectReminderTime,
+  );
+
   /// ================================================ X GET-X METHODS X ================================================
 
   @override
@@ -282,7 +292,6 @@ class RegularHabitController extends GetxController
         : strSelectDurationInDays;
   }
 
-
   void handleEndHabitOnOkClick(BuildContext context) {
     if (endHabitSelectedDate.value == null) {
       AppToast.show(context, message: strPleaseSelectADate, type: .warning);
@@ -309,6 +318,21 @@ class RegularHabitController extends GetxController
       endHabitDatePickerController.text = days == 0
           ? strThisHabitEndsToday
           : endHabitDatePickerController.text = strEndsIn + ' $days ' + strDays;
+    }
+  }
+
+  /// /// ================== X [REMAINDER_FUNCTIONS] X ==================
+  void onSetReminder(bool flag) {
+    isSetRegularReminder.value = flag;
+    if (isSetRegularReminder.value) {
+      setReminderHabitTimeController.text = strPleaseSelectReminderTime;
+    }
+  }
+
+  void onOneTimeSetReminder(bool flag) {
+    isSetOneTimeRegularReminder.value = flag;
+    if (isSetOneTimeRegularReminder.value) {
+      setReminderHabitTimeController.text = strPleaseSelectReminderTime;
     }
   }
 

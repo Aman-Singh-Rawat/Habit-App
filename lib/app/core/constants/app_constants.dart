@@ -232,3 +232,4 @@ const String strEndHabitOn = 'End habit on';
 const String strEndsIn = 'Ends in';
 const String strThisHabitEndsToday = 'This habit ends today';
 const String strDate = 'Date';
+const String strSetReminder = 'Set Reminder';

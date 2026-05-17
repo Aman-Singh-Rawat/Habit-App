@@ -7,6 +7,7 @@ import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/theme/validation.dart';
+import 'package:habitly/app/core/values/app_values.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
 import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/color_section.dart';
@@ -49,79 +50,6 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final controller = CreateNewHabitController.instance;
-    final regularController = RegularHabitController.instance;
-    final habitTextControllerName = isRegularHabit ? strHabitName : strTaskName;
-
-    return SingleChildScrollView(
-      child: Form(
-        key: isRegularHabit
-            ? controller.regularFormKey
-            : controller.oneTimeFormKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /// habit text title field
-            PrimaryTextFieldAndLabel(
-              isRequired: true,
-              validator: (value) =>
-                  AValidator.validateEmptyText(habitTextControllerName, value),
-              title: habitTextControllerName,
-              controller: regularController.habitController,
-            ).paddingSymmetric(horizontal: 20.w),
-
-            AppGaps.section,
-
-            /// Icon section title + "View All" button
-            const ScreenSectionTitleAndActionWidget().paddingSymmetric(
-              horizontal: 20.w,
-            ),
-
-            AppGaps.field,
-
-            /// Icons horizontal list
-            const IconRowWidget().paddingOnly(left: 20.w),
-
-            /// Color Section
-            const ColorSection(),
-
-            /// when or regular [WIDGET]
-            getWhenOrRegularWidget,
-
-            /// Do it at
-            const DoItAtWidget(),
-
-            /// END HABIT ON
-            if (isRegularHabit)
-              const EndHabitOnWidget().paddingOnly(
-                left: AppSpacing.bf,
-                right: AppSpacing.bf,
-                top: AppSpacing.xxl,
-              ),
-
-            /// set reminder
-            Obx(() {
-              return SetReminderWidget(
-                shouldValidate: isSwitchSelected,
-                isSwitchSelected: isRegularHabit
-                    ? controller.setRegularReminder.value
-                    : controller.setOneTimeRegularReminder.value,
-                textEditingController: isRegularHabit
-                    ? controller.setReminderHabitTimeController
-                    : controller.setReminderTaskTimeController,
-                onReminderChanged: isRegularHabit
-                    ? controller.onSetReminder
-                    : controller.onOneTimeSetReminder,
-              );
-            }),
-          ],
-        ).paddingOnly(top: 25.h),
-      ),
-    );
-  }
-
   bool get isSwitchSelected {
     final controller = CreateNewHabitController.instance;
     if (isRegularHabit && controller.setRegularReminder.value) {
@@ -132,4 +60,74 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
       return false;
     }
   }
+
+  @override
+  Widget build(BuildContext context) {
+    //final controller = CreateNewHabitController.instance;
+    final regularController = RegularHabitController.instance;
+    final habitTextControllerName = isRegularHabit ? strHabitName : strTaskName;
+
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// habit text title field
+          PrimaryTextFieldAndLabel(
+            isRequired: true,
+            validator: (value) =>
+                AValidator.validateEmptyText(habitTextControllerName, value),
+            title: habitTextControllerName,
+            controller: regularController.habitController,
+          ).paddingSymmetric(horizontal: 20.w),
+
+          AppGaps.section,
+
+          /// Icon section title + "View All" button
+          const ScreenSectionTitleAndActionWidget().paddingSymmetric(
+            horizontal: 20.w,
+          ),
+
+          AppGaps.field,
+
+          /// Icons horizontal list
+          const IconRowWidget().paddingOnly(left: width_20),
+
+          /// Color Section
+          const ColorSection(),
+
+          /// when or regular [WIDGET]
+          getWhenOrRegularWidget,
+
+          /// Do it at
+          const DoItAtWidget(),
+
+          /// END HABIT ON
+          if (isRegularHabit)
+            const EndHabitOnWidget().paddingOnly(
+              left: AppSpacing.bf,
+              right: AppSpacing.bf,
+              top: AppSpacing.xxl,
+            ),
+
+          /// set reminder
+          Obx(() {
+            return SetReminderWidget(
+              shouldValidate: isSwitchSelected,
+              isSwitchSelected: isRegularHabit
+                  ? regularController.isSetRegularReminder.value
+                  : regularController.isSetOneTimeRegularReminder.value,
+              textEditingController: isRegularHabit
+                  ? regularController.setReminderHabitTimeController
+                  : regularController.setReminderTaskTimeController,
+              onReminderChanged: isRegularHabit
+                  ? regularController.onSetReminder
+                  : regularController.onOneTimeSetReminder,
+            );
+          }),
+        ],
+      ).paddingOnly(top: height_25),
+    );
+  }
+
+
 }

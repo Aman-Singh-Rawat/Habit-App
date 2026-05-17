@@ -6,6 +6,7 @@ import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/constants/app_spacing.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/theme/validation.dart';
+import 'package:habitly/app/core/values/app_values.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/switch_plus_title.dart';
 import 'package:habitly/app/modules/widgets/text_field/date_time_field_widget.dart';
@@ -34,7 +35,7 @@ class SetReminderWidget extends StatelessWidget {
       children: [
         SwitchPlusTitle(
           isSelected: isSwitchSelected,
-          title: AppStrings.setReminder,
+          title: strSetReminder,
           onChanged: onReminderChanged,
         ).paddingOnly(bottom: AppSpacing.bf),
 
@@ -52,6 +53,6 @@ class SetReminderWidget extends StatelessWidget {
             suffixIcon: Iconsax.edit_2,
           ),
       ],
-    ).paddingOnly(left: 20.w, right: 20.w, top: AppSpacing.xl);
+    ).paddingOnly(left: width_20, right: width_20, top: height_24);
   }
 }
