@@ -54,6 +54,9 @@ class RegularHabitController extends GetxController
   /// on these day [weekly]
   final RxInt repeatSelectedPerWeekValue = (-1).obs;
 
+  /// monthly section
+  final RxList<int> selectedMonthlyDays = <int>[].obs;
+
   /// =================================== X REPEAT TYPE SECTION [CLOSE] X ===================================
   final RxList<int> repeatSelectedDaysList = <int>[1, 2, 3, 4, 5, 6, 7].obs;
 
@@ -224,12 +227,19 @@ class RegularHabitController extends GetxController
     }
   }
 
-
   /// DO IT AT
   Rx<int> selectedDoItAtIndex = 0.obs;
 
   /// ================== X [CLOSE] X ==================
 
   /// ================== X [CREATE_NEW_HABIT_FUNCTION] X ==================
+  void onRepeatDateSelected(int index) {
+    if (selectedMonthlyDays.contains(index)) {
+      selectedMonthlyDays.remove(index);
+    } else {
+      selectedMonthlyDays.add(index);
+    }
+  }
+
   void onSave() {}
 }
