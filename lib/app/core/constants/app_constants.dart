@@ -221,7 +221,7 @@ const String strAllDay = 'All Day';
 const String daysPerWeek = 'Days Per Week';
 const String strEveryMonthOn = 'Every Month On';
 const String strDoItAt = 'Do it at';
-const String strRepeatOnDays =  'Repeat on days';
+const String strRepeatOnDays = 'Repeat on days';
 const String strMonthlySchedule = 'Monthly Schedule';
 const String strNoDaysSelected = 'No days selected';
 const String strClearAll = 'Clear All';
@@ -233,3 +233,13 @@ const String strEndsIn = 'Ends in';
 const String strThisHabitEndsToday = 'This habit ends today';
 const String strDate = 'Date';
 const String strSetReminder = 'Set Reminder';
+const String strPleaseEnterHabitName =
+    "Your habit needs a name before it can shine ✨";
+
+const String strPleaseSelectHabitDay =
+    "Pick at least one day to keep the streak alive 🔥";
+
+const String strPleaseSelectEndDate =
+    "Looks like you turned on end date but forgot to choose one 📅";
+
+const String strReminderIsWaitingForATime = "Reminder is waiting for a time ⏰";

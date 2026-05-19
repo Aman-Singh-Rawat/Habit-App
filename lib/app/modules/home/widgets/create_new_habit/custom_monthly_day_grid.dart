@@ -44,11 +44,9 @@ Widget customMonthlyDayGrid() {
                   '${index + 1}',
                   style: TextStyle(
                     fontSize: font_12,
-                    fontFamily: isSelected
-                        ? dmMonoFontFamily
-                        : appFontFamily,
+
                     fontWeight: isSelected
-                        ? FontWeight.w700
+                        ? FontWeight.w600
                         : FontWeight.w500,
                     color: isSelected
                         ? Colors.white
@@ -57,7 +55,7 @@ Widget customMonthlyDayGrid() {
                 ),
               ),
             ),
-          ).paddingAll(width_5);
+          ).paddingAll(width_2);
         });
       },
     ),

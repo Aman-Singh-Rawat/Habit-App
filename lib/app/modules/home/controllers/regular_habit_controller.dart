@@ -89,6 +89,10 @@ class RegularHabitController extends GetxController
     text: strPleaseSelectReminderTime,
   );
 
+  /// for selected time picker value
+  int? reminderHour;
+  int? reminderMinute;
+
   /// ================================================ X GET-X METHODS X ================================================
 
   @override
@@ -114,6 +118,19 @@ class RegularHabitController extends GetxController
     });
 
     endHabitDatePickerController.text = getEndHabitPlaceholder;
+
+    /// first time the how many days will be 7 in repeat widget
+    repeatSelectedPerWeekValue.value = 7;
+
+    /// if [isOnTheseDayCheckboxSelected] is selected means user selected all day so weekly will be choose all day
+    ever(isOnTheseDayCheckboxSelected, (callback) {
+      if (callback) {
+        repeatSelectedPerWeekValue.value = 7;
+
+        /// this is for daily days if 7 days a week chosen then remove all elements from monthly
+        selectedMonthlyDays.clear();
+      }
+    });
   }
 
   /// X ================================================ X FUNCTIONS X ================================================ X
@@ -220,8 +237,6 @@ class RegularHabitController extends GetxController
       repeatSelectedDaysList.value = List.generate(7, (index) => index + 1);
     } else {
       repeatSelectedDaysList.value = [];
-
-      selectedRepeatTypeIndex.value = 1;
     }
   }
 
@@ -235,6 +250,7 @@ class RegularHabitController extends GetxController
       repeatSelectedDaysList.remove(day);
     } else {
       repeatSelectedDaysList.add(day);
+      repeatSelectedPerWeekValue.value = -1;
     }
 
     isOnTheseDayCheckboxSelected.value = repeatSelectedDaysList.length == 7;
@@ -247,7 +263,8 @@ class RegularHabitController extends GetxController
 
       return;
     }
-
+    /// TODO:: FIX weekly first time selection bug
+    repeatSelectedDaysList.clear();
     repeatSelectedPerWeekValue.value = value;
 
     /// this is for daily days if 7 days a week chosen
@@ -255,6 +272,8 @@ class RegularHabitController extends GetxController
       selectedRepeatTypeIndex.value = 0;
       isOnTheseDayCheckboxSelected.value = true;
       repeatSelectedDaysList.value = List.generate(7, (index) => index + 1);
+    } else {
+      isOnTheseDayCheckboxSelected.value = false;
     }
   }
 
@@ -343,9 +362,93 @@ class RegularHabitController extends GetxController
     if (selectedMonthlyDays.contains(index)) {
       selectedMonthlyDays.remove(index);
     } else {
+      /// if any days select in monthly then ==>
       selectedMonthlyDays.add(index);
+
+      /// -- if checkbox is selected in daily then off that
+      isOnTheseDayCheckboxSelected.value = false;
+
+      /// -- remove all days from daily
+      repeatSelectedDaysList.clear();
+
+      /// -- remove days selection from weekly
+      repeatSelectedPerWeekValue.value = -1;
     }
   }
 
-  void onSave() {}
+  /// ================== X [For_Remainder] X ==================
+  void showTimePickerDialog(
+    BuildContext context,
+    TextEditingController controller,
+  ) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (picked != null && context.mounted) {
+      controller.text = picked.format(context);
+      reminderHour = picked.hour;
+      reminderMinute = picked.minute;
+    } else {
+      controller.text = strPleaseSelectReminderTime;
+    }
+  }
+
+  /// -------------------- Validation --------------------
+
+  bool _validateRegularHabit(BuildContext context) {
+
+    /// -- Habit name validation
+    if (habitController.text.trim().isEmpty) {
+      AppToast.warning(context, strPleaseEnterHabitName);
+      return false;
+    }
+
+    /// -- Repeat validation
+    final bool isNoRepeatSelected =
+        repeatSelectedDaysList.isEmpty &&
+            repeatSelectedPerWeekValue.value == -1 &&
+            selectedMonthlyDays.isEmpty;
+
+    if (isNoRepeatSelected) {
+      AppToast.warning(context, strPleaseSelectHabitDay);
+      return false;
+    }
+
+    /// -- End date validation
+    final bool isEndDateMissing =
+        isEndHabitOn.value &&
+            endHabitSelectedDate.value == null;
+
+    if (isEndDateMissing) {
+      AppToast.warning(context, strPleaseSelectEndDate);
+      return false;
+    }
+
+    /// -- Reminder validation
+    final bool isReminderTimeMissing =
+        isSetRegularReminder.value &&
+            (reminderHour == null || reminderMinute == null);
+
+    if (isReminderTimeMissing ||
+        setReminderHabitTimeController.text ==
+            strPleaseSelectReminderTime) {
+      AppToast.warning(context, strReminderIsWaitingForATime);
+      return false;
+    }
+
+    return true;
+  }
+  /// -------------------- Save Habit --------------------
+
+  void onRegularHabitSave(BuildContext context) {
+    /// -- Validating first
+    if (!_validateRegularHabit(context)) return;
+
+    /// --------------------
+    /// save API / logic here
+    /// --------------------
+  }
+
 }

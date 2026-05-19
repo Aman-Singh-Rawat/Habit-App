@@ -21,14 +21,14 @@ class CreateNewHabitScreen extends GetView<RegularHabitController> {
 
   @override
   Widget build(BuildContext context) {
-    return _mainView();
+    return _mainView(context);
   }
 
-  Widget _mainView() {
-    return SafeArea(top: false, child: Scaffold(body: _bodyWidget()));
+  Widget _mainView(BuildContext context) {
+    return SafeArea(top: false, child: Scaffold(body: _bodyWidget(context)));
   }
 
-  Column _bodyWidget() {
+  Column _bodyWidget(BuildContext context) {
     return Column(
       children: [
         Expanded(
@@ -55,7 +55,7 @@ class CreateNewHabitScreen extends GetView<RegularHabitController> {
           width: double.infinity,
           child: CustomElevatedButton(
             buttonText: AppStrings.save,
-            onClick: controller.onSave,
+            onClick: () => controller.onRegularHabitSave(context),
           ),
         ).paddingOnly(
           left: AppSpacing.bf,

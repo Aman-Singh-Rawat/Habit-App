@@ -32,15 +32,7 @@ class PrimaryTextFieldAndLabel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisSize: .min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SectionTitle(text: title),
-            if (isRequired)
-              const SectionTitle(text: ' *', color: Colors.redAccent),
-          ],
-        ),
+        SectionTitle(text: title, isRequired: true),
 
         const SizedBox(height: AppSpacing.sm),
         // Text Field

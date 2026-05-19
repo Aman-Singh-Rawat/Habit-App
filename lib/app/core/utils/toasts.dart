@@ -85,6 +85,22 @@ class Toasts {
 enum ToastType { success, error, warning, info }
 
 class AppToast {
+  static void success(BuildContext context, String message) {
+    show(context, message: message, type: ToastType.success);
+  }
+
+  static void error(BuildContext context, String message) {
+    show(context, message: message, type: ToastType.error);
+  }
+
+  static void warning(BuildContext context, String message) {
+    show(context, message: message, type: ToastType.warning);
+  }
+
+  static void info(BuildContext context, String message) {
+    show(context, message: message, type: ToastType.info);
+  }
+
   static void show(
     BuildContext context, {
     required String message,
@@ -95,8 +111,8 @@ class AppToast {
         message,
         style: TextStyle(
           color: Colors.black,
-          fontSize: font_14,
-          fontWeight: .w600,
+          fontSize: font_13,
+          fontWeight: .w500,
         ),
       ),
       icon: Icon(_icon(type), color: _color(type)),

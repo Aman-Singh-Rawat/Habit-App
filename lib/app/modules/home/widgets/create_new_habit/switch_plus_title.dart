@@ -18,7 +18,7 @@ class SwitchPlusTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SectionTitle(text: title),
+        SectionTitle(text: title, isRequired: isSelected,),
 
         CustomCupertinoSwitch(value: isSelected, onChanged: onChanged),
       ],

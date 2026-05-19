@@ -19,7 +19,7 @@ class SegmentedOptionSelector extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         // Repeat Section
-        SectionTitle(text: text).paddingOnly(
+        SectionTitle(text: text, isRequired: true,).paddingOnly(
           left: AppSpacing.bf,
           top: AppSpacing.xl,
           bottom: AppSpacing.md,

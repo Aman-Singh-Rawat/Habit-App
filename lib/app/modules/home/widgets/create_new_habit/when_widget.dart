@@ -17,6 +17,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../../widgets/bottom_seets/show_calendar_bottom_sheet.dart';
 import '../../../widgets/others/build_calendar.dart';
 
+/// TODO:: fix this
 class WhenWidget extends StatelessWidget {
   const WhenWidget({super.key});
 
@@ -27,7 +28,10 @@ class WhenWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SectionTitle(text: AppStrings.when).paddingOnly(bottom: AppSpacing.lg),
+        SectionTitle(
+          text: AppStrings.when,
+          isRequired: true,
+        ).paddingOnly(bottom: AppSpacing.lg),
         DateTimeFieldWidget(
           controller: controller.whenController,
           validator: AValidator.validateDate,

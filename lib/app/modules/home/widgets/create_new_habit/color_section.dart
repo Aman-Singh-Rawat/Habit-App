@@ -31,8 +31,9 @@ class ColorSection extends StatelessWidget {
       children: [
 
         /// Color Section Title [COLOR]
-        DecoratedTextTitle(
-          title: strColor,
+        SectionTitle(
+          isRequired: true,
+          text: strColor,
         ).paddingOnly(top: height_20, bottom: height_14),
 
         // Swatches + picker button

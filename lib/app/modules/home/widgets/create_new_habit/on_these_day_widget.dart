@@ -71,7 +71,7 @@ class OnTheseDayWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           /// ON THESE DAY [TITLE]
-          SectionTitle(text: strOnTheseDay),
+          SectionTitle(text: strOnTheseDay, isRequired: true,),
 
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
