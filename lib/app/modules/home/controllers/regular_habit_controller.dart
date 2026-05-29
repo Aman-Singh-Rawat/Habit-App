@@ -254,6 +254,10 @@ class RegularHabitController extends GetxController
     }
 
     isOnTheseDayCheckboxSelected.value = repeatSelectedDaysList.length == 7;
+
+    if (!isOnTheseDayCheckboxSelected.value) {
+      repeatSelectedPerWeekValue.value = -1;
+    }
   }
 
   /// Repeat Type [weekly]
@@ -263,8 +267,8 @@ class RegularHabitController extends GetxController
 
       return;
     }
-    /// TODO:: FIX weekly first time selection bug
     repeatSelectedDaysList.clear();
+    selectedMonthlyDays.clear();
     repeatSelectedPerWeekValue.value = value;
 
     /// this is for daily days if 7 days a week chosen
