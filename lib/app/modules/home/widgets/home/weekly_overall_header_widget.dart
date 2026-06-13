@@ -19,9 +19,13 @@ class WeeklyOverallHeaderWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            /// icon
-            Text(habit.icon, style: TextStyle(fontSize: 23.sp)),
-            SizedBox(width: AppSpacing.md),
+
+            if (habit.icon != null) ...[
+              /// icon
+              Text(habit.icon!, style: TextStyle(fontSize: 23.sp)),
+              SizedBox(width: AppSpacing.md),
+            ],
+
 
             /// habit name
             Expanded(

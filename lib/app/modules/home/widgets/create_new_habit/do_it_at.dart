@@ -14,20 +14,26 @@ import 'package:habitly/app/modules/widgets/others/filter_widget.dart';
 import '../../../../core/constants/app_constants.dart';
 
 class DoItAtWidget extends StatelessWidget {
-  const DoItAtWidget({super.key});
+  final bool isRegularHabit;
+
+  const DoItAtWidget({super.key, required this.isRegularHabit});
 
   @override
   Widget build(BuildContext context) {
     final controller = RegularHabitController.instance;
     return SegmentedOptionSelector(
       text: strDoItAt,
-      widget: Obx(
-        () => Row(
+      widget: Obx(() {
+        final doItAtIndex = isRegularHabit
+            ? controller.regularDoItAtIndex
+            : controller.taskDoItAtIndex;
+
+        return Row(
           children: DoItAtEnum.values.asMap().entries.map((item) {
-            final isSelected = controller.selectedDoItAtIndex.value == item.key;
+            final isSelected = doItAtIndex.value == item.key;
             return Expanded(
               child: GestureDetector(
-                onTap: () => controller.selectedDoItAtIndex.value = item.key,
+                onTap: () => doItAtIndex.value = item.key,
                 child: FilterWidget(
                   itemName: item.value.name,
                   isSelected: isSelected,
@@ -35,8 +41,8 @@ class DoItAtWidget extends StatelessWidget {
               ),
             );
           }).toList(),
-        ).paddingOnly(left: 17.w),
-      ),
+        ).paddingOnly(left: 17.w);
+      }),
     );
   }
 }

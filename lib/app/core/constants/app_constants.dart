@@ -243,3 +243,9 @@ const String strPleaseSelectEndDate =
     "Looks like you turned on end date but forgot to choose one 📅";
 
 const String strReminderIsWaitingForATime = "Reminder is waiting for a time ⏰";
+
+const strDontForgetToChooseADate =
+    "😊 Don't forget to choose a date for this habit";
+
+const strYourTaskNeedsAName =
+    "🌱 Your task needs a name to get started";

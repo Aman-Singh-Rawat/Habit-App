@@ -7,6 +7,7 @@ import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/constants/app_lists.dart';
 import 'package:habitly/app/core/constants/emoji_icon_data.dart';
 import 'package:habitly/app/core/utils/helpers/DateClass.dart';
+import 'package:habitly/app/core/utils/helpers/date_time_picker_helper.dart';
 import 'package:habitly/app/core/utils/toasts.dart';
 import 'package:habitly/app/data/local/local_storage.dart';
 import 'package:habitly/app/modules/home/controllers/home_controller.dart';
@@ -458,10 +459,7 @@ class CreateNewHabitController extends GetxController
     BuildContext context,
     TextEditingController controller,
   ) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
+    final picked = await DateTimePickerHelper.showTimePickerDialog(context);
 
     if (picked != null && context.mounted) {
       controller.text = picked.format(context);

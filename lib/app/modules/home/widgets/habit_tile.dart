@@ -30,13 +30,15 @@ class HabitTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          /// prefix ICON seperated because the size
-          Text(
-            habit.icon,
-            style: AppTextStyles.goalTitle.copyWith(fontSize: 28.sp),
-          ),
+          if (habit.icon != null) ...[
+            /// prefix ICON seperated because the size
+            Text(
+              habit.icon!,
+              style: AppTextStyles.goalTitle.copyWith(fontSize: 28.sp),
+            ),
 
-          SizedBox(width: 14.w),
+            SizedBox(width: 14.w),
+          ],
           Expanded(child: Text(habit.name, style: AppTextStyles.goalTitle)),
 
           if (isMyHabits)

@@ -17,10 +17,7 @@ class RepeatContentSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final selectedRepeatEnum =
-          RepeatEnum.values[RegularHabitController
-              .instance
-              .selectedRepeatTypeIndex
-              .value];
+          RegularHabitController.instance.selectedRepeatType.value;
 
       switch (selectedRepeatEnum) {
         case RepeatEnum.Daily:

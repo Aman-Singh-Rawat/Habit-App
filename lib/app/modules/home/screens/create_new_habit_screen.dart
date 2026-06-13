@@ -37,7 +37,9 @@ class CreateNewHabitScreen extends GetView<RegularHabitController> {
               return [_sliverAppBar(innerBoxIsScrolled)];
             },
             body: TabBarView(
+              physics: NeverScrollableScrollPhysics(),
               controller: controller.createNewHabitParentTabController,
+
               children: [
                 CreateNewHabitTabChildWidget(
                   key: PageStorageKey('regular'),
@@ -55,7 +57,7 @@ class CreateNewHabitScreen extends GetView<RegularHabitController> {
           width: double.infinity,
           child: CustomElevatedButton(
             buttonText: AppStrings.save,
-            onClick: () => controller.onRegularHabitSave(context),
+            onClick: () => controller.onSave(context),
           ),
         ).paddingOnly(
           left: AppSpacing.bf,

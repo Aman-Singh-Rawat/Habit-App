@@ -17,7 +17,7 @@ class RegularHabit extends HiveObject implements BaseHabit {
 
   @override
   @HiveField(2)
-  final String icon;
+  final String? icon;
 
   @override
   @HiveField(3)
@@ -59,7 +59,7 @@ class RegularHabit extends HiveObject implements BaseHabit {
   RegularHabit({
     required this.id,
     required this.name,
-    required this.icon,
+    this.icon,
     required this.color,
     required this.repeatType,
     required this.repeatDays,

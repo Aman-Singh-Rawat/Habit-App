@@ -17,7 +17,7 @@ class OneTimeTask extends HiveObject implements BaseHabit {
 
   @override
   @HiveField(2)
-  final String icon;
+  final String? icon;
 
   @override
   @HiveField(3)
@@ -50,7 +50,7 @@ class OneTimeTask extends HiveObject implements BaseHabit {
   OneTimeTask({
     required this.id,
     required this.name,
-    required this.icon,
+    this.icon,
     required this.color,
     required this.scheduledDate,
     required this.reminderHour,

@@ -26,28 +26,22 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
 
   const CreateNewHabitTabChildWidget({super.key, required this.isRegularHabit});
 
-  /// Repeat type [daily, monthly, weekly]
-  Widget get getWhenOrRegularWidget {
-    if (isRegularHabit) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Repeat type Widget
-          const RepeatTypeWidget(),
+  Widget buildScheduleSection() {
+    /// when widget using in one-time task
+    if (!isRegularHabit) return WhenWidget();
 
-          // Repeat Content Widget
-          RepeatContentSection(),
-        ],
-      );
-    } else {
-      // When Widget
-      return WhenWidget().paddingOnly(
-        left: AppSpacing.bf,
-        right: AppSpacing.bf,
-        top: AppSpacing.xl,
-      );
-    }
+    /// Repeat type [daily, monthly, weekly]
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Repeat type Widget
+        const RepeatTypeWidget(),
+
+        // Repeat Content Widget
+        RepeatContentSection(),
+      ],
+    );
   }
 
   bool get isSwitchSelected {
@@ -66,6 +60,9 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
     //final controller = CreateNewHabitController.instance;
     final regularController = RegularHabitController.instance;
     final habitTextControllerName = isRegularHabit ? strHabitName : strTaskName;
+    final reminder = isRegularHabit
+        ? regularController.regularReminder
+        : regularController.oneTimeReminder;
 
     return SingleChildScrollView(
       child: Column(
@@ -96,10 +93,10 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
           const ColorSection(),
 
           /// when or regular [WIDGET]
-          getWhenOrRegularWidget,
+          buildScheduleSection(),
 
           /// Do it at
-          const DoItAtWidget(),
+          DoItAtWidget(isRegularHabit: isRegularHabit,),
 
           /// END HABIT ON
           if (isRegularHabit)
@@ -110,24 +107,13 @@ class CreateNewHabitTabChildWidget extends StatelessWidget {
             ),
 
           /// set reminder
-          Obx(() {
-            return SetReminderWidget(
-              shouldValidate: isSwitchSelected,
-              isSwitchSelected: isRegularHabit
-                  ? regularController.isSetRegularReminder.value
-                  : regularController.isSetOneTimeRegularReminder.value,
-              textEditingController: isRegularHabit
-                  ? regularController.setReminderHabitTimeController
-                  : regularController.setReminderTaskTimeController,
-              onReminderChanged: isRegularHabit
-                  ? regularController.onSetReminder
-                  : regularController.onOneTimeSetReminder,
-            );
-          }),
+          SetReminderWidget(
+            reminder: reminder,
+            onReminderChanged: (value) =>
+                regularController.onReminderChanged(reminder, value),
+          ),
         ],
       ).paddingOnly(top: height_25),
     );
   }
-
-
 }

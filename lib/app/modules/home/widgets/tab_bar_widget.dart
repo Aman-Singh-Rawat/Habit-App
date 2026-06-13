@@ -23,6 +23,7 @@ class TabBarWidget extends StatelessWidget {
       ),
 
       child: TabBar(
+        isScrollable: false,
         labelPadding: EdgeInsets.zero,
         padding: EdgeInsets.zero,
         dividerColor: const Color.fromARGB(0, 219, 170, 170),

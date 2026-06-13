@@ -7,6 +7,7 @@ import 'package:habitly/app/core/constants/app_strings.dart';
 import 'package:habitly/app/core/extensions/secondary_button_text.dart';
 import 'package:habitly/app/core/theme/validation.dart';
 import 'package:habitly/app/modules/home/controllers/create_new_habit_controller.dart';
+import 'package:habitly/app/modules/home/controllers/regular_habit_controller.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/custom_calendar_widget.dart';
 import 'package:habitly/app/modules/home/widgets/create_new_habit/end_habit_on_widget.dart';
 import 'package:habitly/app/modules/widgets/buttons/custom_elevated_button.dart';
@@ -23,67 +24,30 @@ class WhenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = CreateNewHabitController.instance;
+    final controller = RegularHabitController.instance;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        /// section title
         SectionTitle(
           text: AppStrings.when,
           isRequired: true,
         ).paddingOnly(bottom: AppSpacing.lg),
+
+        /// text_field
         DateTimeFieldWidget(
           controller: controller.whenController,
           validator: AValidator.validateDate,
-          onTap: () => showCalendarBottomSheet(
-            context: context,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  fit: FlexFit.loose,
-                  child: Obx(
-                    () => buildCalendar(
-                      context: context,
-                      showHeader: true,
-                      firstDay: DateTime.now(),
-                      focusedDay: controller.whenFocusedDay.value,
-                      selectedDayPredicate:
-                          controller.onWhenSelectedDayPredicate,
-                      onDaySelected: controller.onWhenSingleDaySelected,
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 12),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomElevatedButton(
-                        buttonText: AppStrings.cancel,
-                        onClick: controller.handleWhenOnCancelClick,
-                        textColor: context.secondaryButtonTextColor,
-                        backgroundColor: context.secondaryBackgroundColor,
-                      ),
-                    ),
-                    const SizedBox(width: 17),
-                    Expanded(
-                      child: CustomElevatedButton(
-                        buttonText: AppStrings.ok,
-                        onClick: controller.handleWhenWidgetDateOnOkClick,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          onTap: () => controller.onWhenCalendarTFClick(context),
           prefixIcon: Iconsax.calendar_tick4,
           suffixIcon: Iconsax.edit_2,
         ),
       ],
+    ).paddingOnly(
+      left: AppSpacing.bf,
+      right: AppSpacing.bf,
+      top: AppSpacing.xl,
     );
   }
 }

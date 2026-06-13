@@ -22,16 +22,17 @@ class RepeatTypeWidget extends StatelessWidget {
     return SegmentedOptionSelector(
       text: strRepeat,
       widget: Obx(
-        () => Row(
-          children: RepeatEnum.values.asMap().entries.map((repeatItem) {
+            () => Row(
+          children: RepeatEnum.values.map((repeatType) {
             final isSelected =
-                controller.selectedRepeatTypeIndex.value == repeatItem.key;
+                controller.selectedRepeatType.value == repeatType;
+
             return Expanded(
               child: GestureDetector(
                 onTap: () =>
-                    controller.handleRepeatTypeWidgetClick(repeatItem.key),
+                    controller.handleRepeatTypeWidgetClick(repeatType),
                 child: FilterWidget(
-                  itemName: repeatItem.value.name,
+                  itemName: repeatType.name,
                   isSelected: isSelected,
                 ).marginOnly(right: width_14),
               ),
@@ -39,6 +40,6 @@ class RepeatTypeWidget extends StatelessWidget {
           }).toList(),
         ).paddingOnly(left: width_17),
       ),
-    );
+    );;
   }
 }
