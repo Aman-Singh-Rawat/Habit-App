@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:habitly/app/core/constants/app_constants.dart';
 import 'package:habitly/app/core/constants/app_strings.dart';
+import 'package:habitly/app/core/values/app_values.dart';
 import 'package:habitly/app/modules/home/controllers/home_controller.dart';
 import 'package:habitly/app/modules/home/widgets/category_header_delegate.dart';
 import 'package:habitly/app/modules/home/widgets/custom_tab_widget.dart';
@@ -55,26 +57,26 @@ class HomeScreen extends GetView<HomeController> {
       leadingWidth: 48,
       centerTitle: true,
       leading: LeadingAppBarImageWidget(),
-      title: Text(AppStrings.home),
+      title: Text(strHome),
       actions: const [Icon(Icons.more_vert_rounded)],
       pinned: false,
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(50.h),
+        preferredSize: Size.fromHeight(height_50),
         child: Obx(
           () => TabBarWidget(
             controller: controller.controller,
             tabs: [
               CustomTabWidget(
                 isSelected: controller.selectedTabIndex.value == 0,
-                tabText: AppStrings.today,
+                tabText: strToday,
               ),
               CustomTabWidget(
                 isSelected: controller.selectedTabIndex.value == 1,
-                tabText: AppStrings.weekly,
+                tabText: strWeekly,
               ),
               CustomTabWidget(
                 isSelected: controller.selectedTabIndex.value == 2,
-                tabText: AppStrings.overall,
+                tabText: strOverall,
               ),
             ],
           ),

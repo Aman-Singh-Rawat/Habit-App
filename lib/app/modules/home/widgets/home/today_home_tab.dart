@@ -27,7 +27,7 @@ class TodayHomeTab extends StatelessWidget {
           /// complete habits
           completedHabit(),
         ],
-      ).paddingOnly(top: 15.h, left: AppSpacing.bf, right: AppSpacing.bf),
+      ).horizontalPadding(),
     );
   }
 
@@ -43,12 +43,9 @@ class TodayHomeTab extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  strCompleted,
-                  style: TextStyle(color: AppColors.darkText),
-                ),
+                Text(strCompleted, style: TextStyle(color: AppColors.darkText)),
 
-                Expanded(child: Divider(indent: 5, endIndent: 0,)),
+                Expanded(child: Divider(indent: 5, endIndent: 0)),
               ],
             ).paddingOnly(bottom: AppSpacing.xl),
 
